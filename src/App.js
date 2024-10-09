@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter,
+  Route,
+  Routes
+} from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "./scss/app.scss";
 import Header from "./Components/Header.jsx";
