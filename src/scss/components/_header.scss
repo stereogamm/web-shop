@@ -1,0 +1,40 @@
+@import '../variables';
+
+.header {
+  border-bottom: 1px solid $gray-line;
+  padding: 40px 0;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    display: flex;
+
+    img {
+      margin-right: 15px;
+    }
+
+    h1 {
+      color: $logo;
+      font-size: 34px;
+      letter-spacing: 1%;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    p {
+      color: #aba8a8;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 15px;
+    }
+
+    span {
+      text-transform: lowercase;
+      color: #aba8a8;
+    }
+  }
+}

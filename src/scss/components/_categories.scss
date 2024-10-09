@@ -1,0 +1,33 @@
+@use 'sass:color';
+@import '../_variables';
+
+.categories {
+  ul {
+    display: flex;
+
+    li {
+      background-color: #e4e3e3;
+      padding: 13px 30px;
+      border-radius: 30px;
+      margin-right: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+      color: $text;
+      @include noselect();
+
+      &:hover {
+        background-color: color.scale(#f9f9f9, $lightness: -10%);
+      }
+
+      &:active {
+        background-color: color.scale(#f9f9f9, $lightness: -25%);
+      }
+
+      &.active {
+        background-color: $logo;
+        color: white;
+      }
+    }
+  }
+}
