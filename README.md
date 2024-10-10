@@ -21,3 +21,4 @@ Welcome to my project 'NOODLE & BYTES'. This is a self-study project for creatin
 
 
 ![Repo Card](https://github-readme-stats.vercel.app/api/pin/?username=stereogamm&repo=web-shop&theme=ambient_gradient&show_owner=true&hide=issues)
+
