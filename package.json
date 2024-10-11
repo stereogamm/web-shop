@@ -2,6 +2,7 @@
   "name": "react-canonical",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://stereogamm.github.io/web-shop/",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
     "@testing-library/jest-dom": "^5.16.5",
@@ -77,6 +78,7 @@
   },
   "scripts": {
     "start": "webpack serve --mode=development",
+    "build": "webpack --mode=production",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
@@ -84,7 +86,9 @@
     "format": "prettier ./src --write",
     "cypress:open": "cypress open",
     "test": "jest --verbose",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+    
   },
   "eslintConfig": {
     "extends": [

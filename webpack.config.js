@@ -61,7 +61,7 @@ module.exports = {
       extensions: ['.js', '.jsx']
     }),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './index.html'
     }),
     new Dotenv()
   ],
@@ -72,7 +72,7 @@ module.exports = {
       '.jsx',
       '.json',
       '.css',
-      '.scss', // Добавляем поддержку .scss
+      '.scss', 
       '.png',
       '.svg',
       '.jpg'
