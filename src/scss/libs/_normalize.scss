@@ -3,7 +3,6 @@
     padding: 0;
     margin: 0;
     list-style: none;
-    outline: none;
     font-family: 'Prompt', Roboto, system-ui, Tahoma, sans-serif;
     box-sizing: border-box;
   }
@@ -43,6 +42,10 @@
   
   a {
     text-decoration: none;
+  }
+
+    a:focus {
+    outline: 4px solid $logo;
   }
   
   @mixin noselect {
