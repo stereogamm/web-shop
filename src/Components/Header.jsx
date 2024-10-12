@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../public/assets/images/logo_red.svg";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -8,10 +9,12 @@ function Header() {
         <div className="header__logo">
           <img width="38" src={logo} alt="Pizza logo" />
           <div>
-            <h1>noodle & bytes</h1>
-            <p>
-              all you need is rock&apos;<span>n</span>&apos;ramen
-            </p>
+            <Link to="/">
+              <h1>noodle & bytes</h1>
+              <p>
+                all you need is rock&apos;<span>n</span>&apos;ramen
+              </p>
+            </Link>
           </div>
         </div>
         <div className="header__cart">
