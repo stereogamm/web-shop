@@ -1,8 +1,6 @@
 @use 'sass:color';
 @import '../_variables';
 
-
-
 .button {
   display: inline-block;
   background-color: $orange;
@@ -148,4 +146,37 @@
       font-size: 16px;
     }
   }
-}
+
+  @media (max-width: 520px) {
+    margin-top: 16px;
+  }
+
+  @media (max-width: 414px) {
+      padding: 8px 16px; 
+      min-width: 80px; 
+      
+  
+      span {
+        font-size: 14px; 
+      }
+  
+      &--circle {
+        width: 28px; 
+        height: 28px;
+        min-width: 28px;
+      }
+  
+      &--cart {
+        padding: 10px 20px; 
+  
+        span {
+          font-size: 14px; 
+        }
+  
+        svg {
+          width: 16px; 
+          height: 16px;
+        }
+      }
+    }
+  }

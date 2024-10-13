@@ -4,6 +4,15 @@
 .categories {
   ul {
     display: flex;
+    flex-direction: row;
+
+    @media (max-width: 1400px) {
+      flex-wrap: wrap;
+       
+      li {
+        margin: 10px 0;
+      }
+    }
 
     li {
       background-color: #e4e3e3;

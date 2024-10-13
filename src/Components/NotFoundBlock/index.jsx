@@ -15,7 +15,7 @@ const NotFoundBlock = () => (
       back to the homepage or pretend you never saw this.
     </p>
     <Link to="/" className={styles.btn__home} aria-label="return to main page">
-      abort mission and return to base
+      🪂 сlick here to return to base
     </Link>
   </div>
 );

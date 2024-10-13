@@ -15,51 +15,53 @@ function Card({ price, title, sizes, types }) {
   };
 
   return (
-    <div className="ramen-block">
-      <img className="ramen-block__image" src={image} alt="Pizza" />
-      <h4 className="ramen-block__title">{title}</h4>
-      <div className="ramen-block__selector">
-        <ul>
-          {types.map((type) => (
-            <li
-              key={uuidv4()}
-              onClick={() => setActiveType(type)}
-              className={activeType === type ? "active" : ""}
-            >
-              {type ? isSpicy[0] : isSpicy[1]}
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {sizes.map((size, i) => (
-            <li
-              key={uuidv4()}
-              onClick={() => setActiveSize(i)}
-              className={activeSize === i ? "active" : ""}
-            >
-              {size}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="ramen-block__bottom">
-        <div className="ramen-block__price">{price} btc</div>
-        <button
-          className="button button--outline button--add"
-          onClick={addPizza}
-        >
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 12 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+    <div className="ramen-block__wrapper">
+      <div className="ramen-block">
+        <img className="ramen-block__image" src={image} alt="Pizza" />
+        <h4 className="ramen-block__title">{title}</h4>
+        <div className="ramen-block__selector">
+          <ul>
+            {types.map((type) => (
+              <li
+                key={uuidv4()}
+                onClick={() => setActiveType(type)}
+                className={activeType === type ? "active" : ""}
+              >
+                {type ? isSpicy[0] : isSpicy[1]}
+              </li>
+            ))}
+          </ul>
+          <ul>
+            {sizes.map((size, i) => (
+              <li
+                key={uuidv4()}
+                onClick={() => setActiveSize(i)}
+                className={activeSize === i ? "active" : ""}
+              >
+                {size}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="ramen-block__bottom">
+          <div className="ramen-block__price">{price} btc</div>
+          <button
+            className="button button--outline button--add"
+            onClick={addPizza}
           >
-            <path />
-          </svg>
-          <span>Add Yum </span>
-          <i>{count}</i>
-        </button>
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 12 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path />
+            </svg>
+            <span>Add Yum </span>
+            <i>{count}</i>
+          </button>
+        </div>
       </div>
     </div>
   );

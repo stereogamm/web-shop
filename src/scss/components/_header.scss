@@ -6,8 +6,16 @@
 
   .container {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
+    @media(max-width: 520px) {
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-self: space-between;
+      align-items:center;
+    }
   }
 
   &__logo {
