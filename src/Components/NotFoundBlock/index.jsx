@@ -12,7 +12,7 @@ const NotFoundBlock = () => (
     </h1>
     <p>
       *It seems this page has wandered off. While we track it down, you can head
-      back to the homepage or pretend you never saw this.
+      back to the homepage or pretend you never saw this
     </p>
     <Link to="/" className={styles.btn__home} aria-label="return to main page">
       🪂 сlick here to return to base

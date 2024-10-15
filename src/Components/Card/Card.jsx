@@ -17,7 +17,7 @@ function Card({ price, title, sizes, types }) {
   return (
     <div className="ramen-block__wrapper">
       <div className="ramen-block">
-        <img className="ramen-block__image" src={image} alt="Pizza" />
+        <img className="ramen-block__image" src={image} alt="Ramen" />
         <h4 className="ramen-block__title">{title}</h4>
         <div className="ramen-block__selector">
           <ul>

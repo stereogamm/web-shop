@@ -72,6 +72,12 @@ body {
     align-items: center;
   }
 
+  .content__items {
+    display: flex; 
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
   .content__title {
     display: flex;
     align-items: center;
@@ -121,6 +127,10 @@ body {
         color: color.scale($color:  #b6b6b6, $lightness: -50%);
       }
     }
+  }
+  
+  &__items {
+    display: block;
   }
 
   &__item {

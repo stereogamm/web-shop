@@ -22,28 +22,31 @@ const Home = () => {
         console.error("Error is: ", error);
         setIsLoading(false);
       });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   return (
     <>
-      <div className="content__top">
-        <Categories />
-        <Sort />
-      </div>
-      <h2 className="content__title">Ctrl + Slurp + Del</h2>
-      <div className="content__items">
-        {isLoading
-          ? [...new Array(6)].map((_, index) => <SkeletonCard key={index} />)
-          : items.map((obj) => (
-              <Card
-                key={uuidv4()}
-                price={obj.price}
-                title={obj.title}
-                image={obj.image}
-                sizes={obj.sizes}
-                types={obj.types}
-              />
-            ))}
+      <div className="container">
+        <div className="content__top">
+          <Categories />
+          <Sort />
+        </div>
+        <h2 className="content__title">Ctrl + Slurp + Del</h2>
+        <div className="content__items">
+          {isLoading
+            ? [...new Array(6)].map((_, index) => <SkeletonCard key={index} />)
+            : items.map((obj) => (
+                <Card
+                  key={uuidv4()}
+                  price={obj.price}
+                  title={obj.title}
+                  image={obj.image}
+                  sizes={obj.sizes}
+                  types={obj.types}
+                />
+              ))}
+        </div>
       </div>
     </>
   );
