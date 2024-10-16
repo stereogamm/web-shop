@@ -8,29 +8,47 @@ import Sort from "../Components/Sort";
 import SkeletonCard from "../Components/Card/SkeletonCard";
 
 const Home = () => {
-  const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [items, setItems] = useState([]); //use hook to render cards
+  const [isLoading, setIsLoading] = useState(true); //use hook to render skeleton
+
+  const [categoryId, setCategoryId] = useState(0);
+  const [sortType, setSortType] = useState({
+    name: " 🔺 🔻 ",
+    sortProperty: "rating",
+  });
 
   useEffect(() => {
-    fetch("https://6704f473031fd46a830e0b4e.mockapi.io/items")
+    setIsLoading(true); //set status to render skeleton
+
+    const category = categoryId > 0 ? `category=${categoryId}&` : "";
+    const sort = sortType.sortProperty.startsWith("-") ? "asc" : "desc";
+    const replace = sortType.sortProperty.replace("-", "");
+
+    //request with filter queries
+    fetch(
+      `https://6704f473031fd46a830e0b4e.mockapi.io/items?${category}sortBy=${replace}&order=${sort}`,
+    )
       .then((response) => response.json())
       .then((data) => {
-        setItems(data);
+        setItems(data); //set status to render content
         setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error is: ", error);
         setIsLoading(false);
       });
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+    window.scrollTo({ top: 0, behavior: "smooth" }); //to make scroll smoothely
+  }, [categoryId, sortType]);
 
   return (
     <>
       <div className="container">
         <div className="content__top">
-          <Categories />
-          <Sort />
+          <Categories
+            value={categoryId}
+            onClickCategory={(i) => setCategoryId(i)}
+          />
+          <Sort value={sortType} onClickSort={(i) => setSortType(i)} />
         </div>
         <h2 className="content__title">Ctrl + Slurp + Del</h2>
         <div className="content__items">

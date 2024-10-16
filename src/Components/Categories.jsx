@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+import React from "react";
 import { v4 as uuidv4 } from "uuid";
+import PropTypes from "prop-types";
 
-function Categories() {
+function Categories({ value, onClickCategory }) {
   const categoties = [
     "All",
     "Creamy Tonkotsu",
@@ -10,22 +12,17 @@ function Categories() {
     "Miso Madness",
     "Ramen for the Brave",
   ];
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const changeState = (index) => {
-    setActiveIndex(index);
-  };
 
   return (
     <div className="categories">
       <ul>
-        {categoties.map((value, i) => (
+        {categoties.map((categoryName, i) => (
           <li
             key={uuidv4()}
-            onClick={() => changeState(i)}
-            className={activeIndex === i ? "active" : ""}
+            onClick={() => onClickCategory(i)}
+            className={value === i ? "active" : ""}
           >
-            {value}
+            {categoryName}
           </li>
         ))}
       </ul>
@@ -34,3 +31,8 @@ function Categories() {
 }
 
 export default Categories;
+
+Categories.propTypes = {
+  value: PropTypes.number.isRequired, // should be num and required
+  onClickCategory: PropTypes.func.isRequired,
+};

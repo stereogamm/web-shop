@@ -1,20 +1,26 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import PropTypes from "prop-types";
 
-function Sort() {
+function Sort({ value, onClickSort }) {
   const [visible, setVisible] = useState(false);
-  const [sortName, setSortName] = useState("Top Noodles");
+
+  const list = [
+    { name: "rating 🔝", sortProperty: "rating" },
+    { name: "price 🔻", sortProperty: "price" },
+    { name: "price 🔺", sortProperty: "-price" },
+    { name: "z - a", sortProperty: "title" },
+    { name: "a - z", sortProperty: "-title" },
+  ];
 
   const changeSortList = () => {
     setVisible(!visible);
   };
 
-  const changeOnClickItem = (name) => {
-    setSortName(name);
+  const changeOnClickItem = (value) => {
+    onClickSort(value);
     setVisible(false);
   };
-
-  const list = ["Top Noodles", "Coin-friendly", "Ramen A-Z"];
 
   return (
     <div className="sort">
@@ -33,18 +39,20 @@ function Sort() {
           />
         </svg>
         <b>Sort by: </b>
-        <span onClick={() => changeSortList()}>{sortName}</span>
+        <span onClick={() => changeSortList()}>{value.name}</span>
       </div>
       {visible && (
         <div className="sort__popup">
           <ul>
-            {list.map((name, i) => (
+            {list.map((obj) => (
               <li
-                onClick={() => changeOnClickItem(name)}
+                onClick={() => changeOnClickItem(obj)}
                 key={uuidv4()}
-                className={sortName === i ? "active" : ""}
+                className={
+                  value.sortProperty === obj.sortProperty ? "active" : ""
+                }
               >
-                {name}
+                {obj.name}
               </li>
             ))}
           </ul>
@@ -55,3 +63,8 @@ function Sort() {
 }
 
 export default Sort;
+
+Sort.propTypes = {
+  value: PropTypes.object.isRequired, // should be obj and required
+  onClickSort: PropTypes.func.isRequired,
+};
