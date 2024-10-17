@@ -2,6 +2,8 @@ import React from "react";
 import logo from "../../public/assets/images/logo_red.svg";
 import { Link } from "react-router-dom";
 
+import Search from "./Search";
+
 function Header() {
   return (
     <div className="header">
@@ -17,6 +19,7 @@ function Header() {
             </Link>
           </div>
         </div>
+        <Search />
         <div className="header__cart">
           <Link to="/basket" className="button button--cart">
             <span>btc</span>

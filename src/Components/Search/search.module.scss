@@ -1,0 +1,22 @@
+@use 'sass:color';
+@import '../../scss/variables';
+
+.input {
+    border: none;
+    border-bottom: 1.5px solid $logo;
+    padding: 3px 10px;
+    color: $text;
+    font-size: 16px;
+    opacity: 0.7;
+    width: 200px;
+    transition: all .5s ease-in-out;
+}
+
+input:focus {
+    outline: none;
+    border: 1.5px solid $logo;
+    box-shadow: 0 0 5px rgba(140, 141, 142, 0.5);
+    border-radius: 8px;
+    width: 310px;
+}
+
