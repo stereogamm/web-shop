@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 // import "./scss/app.scss";
 
@@ -8,9 +8,11 @@ import NotFound from "./pages/NotFound.jsx";
 import Basket from "./pages/Basket.jsx";
 
 function App() {
+  const [searchValue, setSearchValue] = useState("");
+
   return (
     <div className="wrapper">
-      <Header />
+      <Header searchValue={searchValue} setSearchValue={setSearchValue} />
       <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />

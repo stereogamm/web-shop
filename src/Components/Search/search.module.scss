@@ -1,22 +1,45 @@
-@use 'sass:color';
-@import '../../scss/variables';
+@use "sass:color";
+@import "../../scss/variables";
 
-.input {
-    border: none;
-    border-bottom: 1.5px solid $logo;
-    padding: 3px 10px;
-    color: $text;
-    font-size: 16px;
-    opacity: 0.7;
-    width: 200px;
-    transition: all .5s ease-in-out;
+input {
+  border: none;
+  border-bottom: 1.5px solid #d0cccc;
+  padding: 3px 35px 3px 10px;
+  color: $text;
+  font-size: 20px;
+  opacity: 0.7;
+  width: 200px;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+  caret-color: #bcb8b8;
+  transition: border-color 0.3s;
+}
+
+label {
+  position: relative;
+  display: inline-block;
 }
 
 input:focus {
-    outline: none;
-    border: 1.5px solid $logo;
-    box-shadow: 0 0 5px rgba(140, 141, 142, 0.5);
-    border-radius: 8px;
-    width: 310px;
+  outline: none;
+  position: relative;
+  color: $logo;
 }
 
+.empty__icon {
+  width: 37px;
+  height: 37px;
+  position: absolute;
+  right: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  opacity: 0.3;
+  transition: opacity 0.3s ease-in-out;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+//TODO: add media queries

@@ -1,10 +1,11 @@
 import React from "react";
 import logo from "../../public/assets/images/logo_red.svg";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import Search from "./Search";
 
-function Header() {
+function Header({ searchValue, setSearchValue }) {
   return (
     <div className="header">
       <div className="container">
@@ -19,7 +20,7 @@ function Header() {
             </Link>
           </div>
         </div>
-        <Search />
+        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
         <div className="header__cart">
           <Link to="/basket" className="button button--cart">
             <span>btc</span>
@@ -62,3 +63,8 @@ function Header() {
 }
 
 export default Header;
+
+Header.propTypes = {
+  searchValue: PropTypes.string.isRequired,
+  setSearchValue: PropTypes.func,
+};
