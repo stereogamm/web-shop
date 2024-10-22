@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import PropTypes from "prop-types";
 
 import "../scss/app.scss";
 import Categories from "../Components/Categories";
@@ -7,9 +8,25 @@ import Card from "../Components/Card/Card";
 import Sort from "../Components/Sort";
 import SkeletonCard from "../Components/Card/SkeletonCard";
 
-const Home = () => {
-  const [items, setItems] = useState([]); //use hook to render cards
+const Home = ({ searchValue }) => {
+  const [items, setItems] = useState([]); //use hook to render cards when it were got from server 
   const [isLoading, setIsLoading] = useState(true); //use hook to render skeleton
+
+console.log("items", items)
+
+//create objects array from items if object title includes searchValue string and then create with .map method data to render cards
+  const noodles = items
+    .filter((obj) => {
+      if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
+        return true;
+      }
+      return false;
+    })
+    .map((obj) => <Card key={uuidv4()} {...obj} />);
+
+  const skeleton = [...new Array(6)].map((_, index) => (
+    <SkeletonCard key={index} />
+  ));
 
   const [categoryId, setCategoryId] = useState(0);
   const [sortType, setSortType] = useState({
@@ -26,7 +43,7 @@ const Home = () => {
 
     //request with filter queries
     fetch(
-      `https://6704f473031fd46a830e0b4e.mockapi.io/items?${category}sortBy=${replace}&order=${sort}`,
+      `https://6704f473031fd46a830e0b4e.mockapi.io/items?${category}sortBy=${replace}&order=${sort}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -51,23 +68,15 @@ const Home = () => {
           <Sort value={sortType} onClickSort={(i) => setSortType(i)} />
         </div>
         <h2 className="content__title">Ctrl + Slurp + Del</h2>
-        <div className="content__items">
-          {isLoading
-            ? [...new Array(6)].map((_, index) => <SkeletonCard key={index} />)
-            : items.map((obj) => (
-                <Card
-                  key={uuidv4()}
-                  price={obj.price}
-                  title={obj.title}
-                  image={obj.image}
-                  sizes={obj.sizes}
-                  types={obj.types}
-                />
-              ))}
-        </div>
+        <div className="content__items">{isLoading ? skeleton : noodles}</div>
       </div>
     </>
   );
 };
 
 export default Home;
+
+Home.propTypes = {
+  searchValue: PropTypes.string.isRequired,
+  setSearchValue: PropTypes.func,
+};
