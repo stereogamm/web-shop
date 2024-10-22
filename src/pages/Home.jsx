@@ -9,24 +9,8 @@ import Sort from "../Components/Sort";
 import SkeletonCard from "../Components/Card/SkeletonCard";
 
 const Home = ({ searchValue }) => {
-  const [items, setItems] = useState([]); //use hook to render cards when it were got from server 
+  const [items, setItems] = useState([]); //use hook to render cards when it were got from server
   const [isLoading, setIsLoading] = useState(true); //use hook to render skeleton
-
-console.log("items", items)
-
-//create objects array from items if object title includes searchValue string and then create with .map method data to render cards
-  const noodles = items
-    .filter((obj) => {
-      if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
-        return true;
-      }
-      return false;
-    })
-    .map((obj) => <Card key={uuidv4()} {...obj} />);
-
-  const skeleton = [...new Array(6)].map((_, index) => (
-    <SkeletonCard key={index} />
-  ));
 
   const [categoryId, setCategoryId] = useState(0);
   const [sortType, setSortType] = useState({
@@ -37,16 +21,19 @@ console.log("items", items)
   useEffect(() => {
     setIsLoading(true); //set status to render skeleton
 
+    //variables to create different search params (filtering by back-end)
     const category = categoryId > 0 ? `category=${categoryId}&` : "";
     const sort = sortType.sortProperty.startsWith("-") ? "asc" : "desc";
     const replace = sortType.sortProperty.replace("-", "");
+    const search = searchValue ? `&search=${searchValue}` : "";
 
     //request with filter queries
     fetch(
-      `https://6704f473031fd46a830e0b4e.mockapi.io/items?${category}sortBy=${replace}&order=${sort}`
+      `https://6704f473031fd46a830e0b4e.mockapi.io/items?${category}sortBy=${replace}&order=${sort}${search}`,
     )
       .then((response) => response.json())
       .then((data) => {
+        console.log("Fetched data:", data);
         setItems(data); //set status to render content
         setIsLoading(false);
       })
@@ -55,7 +42,13 @@ console.log("items", items)
         setIsLoading(false);
       });
     window.scrollTo({ top: 0, behavior: "smooth" }); //to make scroll smoothely
-  }, [categoryId, sortType]);
+  }, [categoryId, sortType, searchValue]);
+
+  const noodles = items.map((obj) => <Card key={uuidv4()} {...obj} />);
+
+  const skeleton = [...new Array(6)].map((_, index) => (
+    <SkeletonCard key={index} />
+  ));
 
   return (
     <>
