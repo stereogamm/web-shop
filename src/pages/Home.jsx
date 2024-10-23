@@ -7,10 +7,13 @@ import Categories from "../Components/Categories";
 import Card from "../Components/Card/Card";
 import Sort from "../Components/Sort";
 import SkeletonCard from "../Components/Card/SkeletonCard";
+import Pagination from "../Components/Pagination/index";
 
 const Home = ({ searchValue }) => {
   const [items, setItems] = useState([]); //use hook to render cards when it were got from server
   const [isLoading, setIsLoading] = useState(true); //use hook to render skeleton
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [categoryId, setCategoryId] = useState(0);
   const [sortType, setSortType] = useState({
@@ -29,7 +32,7 @@ const Home = ({ searchValue }) => {
 
     //request with filter queries
     fetch(
-      `https://6704f473031fd46a830e0b4e.mockapi.io/items?${category}sortBy=${replace}&order=${sort}${search}`,
+      `https://6704f473031fd46a830e0b4e.mockapi.io/items?page=${currentPage}&limit=6&${category}sortBy=${replace}&order=${sort}${search}`,
     )
       .then((response) => response.json())
       .then((data) => {
@@ -42,7 +45,7 @@ const Home = ({ searchValue }) => {
         setIsLoading(false);
       });
     window.scrollTo({ top: 0, behavior: "smooth" }); //to make scroll smoothely
-  }, [categoryId, sortType, searchValue]);
+  }, [categoryId, sortType, searchValue, currentPage]);
 
   const noodles = items.map((obj) => <Card key={uuidv4()} {...obj} />);
 
@@ -60,8 +63,9 @@ const Home = ({ searchValue }) => {
           />
           <Sort value={sortType} onClickSort={(i) => setSortType(i)} />
         </div>
-        <h2 className="content__title">Ctrl + Slurp + Del</h2>
+        <h2 className="content__title" />
         <div className="content__items">{isLoading ? skeleton : noodles}</div>
+        <Pagination onChangePage={(number) => setCurrentPage(number)} />
       </div>
     </>
   );

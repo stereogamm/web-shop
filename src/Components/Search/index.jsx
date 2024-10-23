@@ -9,7 +9,7 @@ const Search = ({ searchValue, setSearchValue }) => (
       <input
         id="search"
         className={styles.input}
-        placeholder="🥢"
+        placeholder="Search..."
         type="text"
         pattern="[A-Za-z]*"
         inputMode="text"
