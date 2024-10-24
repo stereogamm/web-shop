@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import Search from "./Search";
 
-function Header({ searchValue, setSearchValue }) {
+function Header() {
   return (
     <div className="header">
       <div className="container">
@@ -20,7 +20,7 @@ function Header({ searchValue, setSearchValue }) {
             </Link>
           </div>
         </div>
-        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+        <Search />
         <div className="header__cart">
           <Link to="/basket" className="button button--cart">
             <span>btc</span>
@@ -65,6 +65,6 @@ function Header({ searchValue, setSearchValue }) {
 export default Header;
 
 Header.propTypes = {
-  searchValue: PropTypes.string.isRequired,
+  searchValue: PropTypes.string,
   setSearchValue: PropTypes.func,
 };

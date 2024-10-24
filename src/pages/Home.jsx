@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 
@@ -8,8 +8,12 @@ import Card from "../Components/Card/Card";
 import Sort from "../Components/Sort";
 import SkeletonCard from "../Components/Card/SkeletonCard";
 import Pagination from "../Components/Pagination/index";
+import { searchContext } from "../App";
 
-const Home = ({ searchValue }) => {
+const Home = () => {
+  //Use the useContext hook to track changes in the { searchValue } value, avoiding the need for props drilling
+  const { searchValue } = useContext(searchContext);
+
   const [items, setItems] = useState([]); //use hook to render cards when it were got from server
   const [isLoading, setIsLoading] = useState(true); //use hook to render skeleton
 
@@ -36,7 +40,6 @@ const Home = ({ searchValue }) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log("Fetched data:", data);
         setItems(data); //set status to render content
         setIsLoading(false);
       })
@@ -65,7 +68,7 @@ const Home = ({ searchValue }) => {
         </div>
         <h2 className="content__title" />
         <div className="content__items">{isLoading ? skeleton : noodles}</div>
-        <Pagination onChangePage={(number) => setCurrentPage(number)} />
+        <Pagination changePage={(number) => setCurrentPage(number)} />
       </div>
     </>
   );
@@ -74,6 +77,6 @@ const Home = ({ searchValue }) => {
 export default Home;
 
 Home.propTypes = {
-  searchValue: PropTypes.string.isRequired,
+  searchValue: PropTypes.string,
   setSearchValue: PropTypes.func,
 };

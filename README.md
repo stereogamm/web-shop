@@ -15,6 +15,11 @@ Welcome to my project 'NOODLE & BYTES'. This is a self-study project for creatin
 
 The project features responsive design using flex-box and grid approach and media query technology for standard screen resolutions of desktop displays, tablet screens, and mobile devices. The minimum supported screen resolution is 375 px
 
+- npm run 
+- npm run lint -- --fix
+- npm run deploy
+
+
 ## Project activity
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/stereogamm/web-shop?style=for-the-badge&labelColor=%23e6dbbb&color=%23c30000)
 
