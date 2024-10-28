@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 
+import { useSelector, useDispatch } from "react-redux";
+import { setCategoryId } from "../redux/slices/FilterSlice";
+
 import "../scss/app.scss";
 import Categories from "../Components/Categories";
 import Card from "../Components/Card/Card";
@@ -11,6 +14,9 @@ import Pagination from "../Components/Pagination/index";
 import { searchContext } from "../App";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const categoryId = useSelector((state) => state.FilterSlice.categoryId);
+
   //Use the useContext hook to track changes in the { searchValue } value, avoiding the need for props drilling
   const { searchValue } = useContext(searchContext);
 
@@ -19,11 +25,16 @@ const Home = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [categoryId, setCategoryId] = useState(0);
+  // const [categoryId, setCategoryId] = useState(0);
+
   const [sortType, setSortType] = useState({
     name: " 🔺 🔻 ",
     sortProperty: "rating",
   });
+
+  const onClickCategory = (id) => {
+    dispatch(setCategoryId(id));
+  };
 
   useEffect(() => {
     setIsLoading(true); //set status to render skeleton
@@ -60,10 +71,7 @@ const Home = () => {
     <>
       <div className="container">
         <div className="content__top">
-          <Categories
-            value={categoryId}
-            onClickCategory={(i) => setCategoryId(i)}
-          />
+          <Categories value={categoryId} onClickCategory={onClickCategory} />
           <Sort value={sortType} onClickSort={(i) => setSortType(i)} />
         </div>
         <h2 className="content__title" />
