@@ -16,6 +16,7 @@ import { searchContext } from "../App";
 const Home = () => {
   const dispatch = useDispatch();
   const categoryId = useSelector((state) => state.FilterSlice.categoryId);
+  const sortType = useSelector((state) => state.FilterSlice.sort.sortProperty);
 
   //Use the useContext hook to track changes in the { searchValue } value, avoiding the need for props drilling
   const { searchValue } = useContext(searchContext);
@@ -24,13 +25,6 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true); //use hook to render skeleton
 
   const [currentPage, setCurrentPage] = useState(1);
-
-  // const [categoryId, setCategoryId] = useState(0);
-
-  const [sortType, setSortType] = useState({
-    name: " 🔺 🔻 ",
-    sortProperty: "rating",
-  });
 
   const onClickCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -41,8 +35,8 @@ const Home = () => {
 
     //variables to create different search params (filtering by back-end)
     const category = categoryId > 0 ? `category=${categoryId}&` : "";
-    const sort = sortType.sortProperty.startsWith("-") ? "asc" : "desc";
-    const replace = sortType.sortProperty.replace("-", "");
+    const sort = sortType.startsWith("-") ? "asc" : "desc";
+    const replace = sortType.replace("-", "");
     const search = searchValue ? `&search=${searchValue}` : "";
 
     //request with filter queries
@@ -72,7 +66,7 @@ const Home = () => {
       <div className="container">
         <div className="content__top">
           <Categories value={categoryId} onClickCategory={onClickCategory} />
-          <Sort value={sortType} onClickSort={(i) => setSortType(i)} />
+          <Sort />
         </div>
         <h2 className="content__title" />
         <div className="content__items">{isLoading ? skeleton : noodles}</div>

@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { setSort } from "../redux/slices/FilterSlice";
 
-function Sort({ value, onClickSort }) {
+function Sort() {
+  const dispatch = useDispatch();
+  const sort = useSelector((state) => state.FilterSlice.sort);
+
   const [visible, setVisible] = useState(false);
 
   const list = [
@@ -17,8 +21,8 @@ function Sort({ value, onClickSort }) {
     setVisible(!visible);
   };
 
-  const changeOnClickItem = (value) => {
-    onClickSort(value);
+  const changeOnClickItem = (obj) => {
+    dispatch(setSort(obj));
     setVisible(false);
   };
 
@@ -39,7 +43,7 @@ function Sort({ value, onClickSort }) {
           />
         </svg>
         <b>Sort by: </b>
-        <span onClick={() => changeSortList()}>{value.name}</span>
+        <span onClick={() => changeSortList()}>{sort.name}</span>
       </div>
       {visible && (
         <div className="sort__popup">
@@ -49,7 +53,7 @@ function Sort({ value, onClickSort }) {
                 onClick={() => changeOnClickItem(obj)}
                 key={uuidv4()}
                 className={
-                  value.sortProperty === obj.sortProperty ? "active" : ""
+                  sort.sortProperty === obj.sortProperty ? "active" : ""
                 }
               >
                 {obj.name}
@@ -63,8 +67,3 @@ function Sort({ value, onClickSort }) {
 }
 
 export default Sort;
-
-Sort.propTypes = {
-  value: PropTypes.object.isRequired, // should be obj and required
-  onClickSort: PropTypes.func.isRequired,
-};
