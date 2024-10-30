@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import styles from "./pagination.module.scss";
 
-const Pagination = ({ changePage }) => (
+const Pagination = ({ currentPage, changePage }) => (
   <ReactPaginate
     className={styles.root}
     breakLabel="..."
@@ -12,6 +12,7 @@ const Pagination = ({ changePage }) => (
     onPageChange={(event) => changePage(event.selected + 1)}
     pageRangeDisplayed={6}
     pageCount={3}
+    forcePage={currentPage - 1}
     previousLabel="🔙"
     renderOnZeroPageCount={null}
   />
@@ -21,4 +22,5 @@ export default Pagination;
 
 Pagination.propTypes = {
   changePage: PropTypes.func.isRequired,
+  currentPage: PropTypes.number,
 };

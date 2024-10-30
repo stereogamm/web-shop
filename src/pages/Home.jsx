@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setCategoryId } from "../redux/slices/FilterSlice";
+import { setCategoryId, setCurrentPage } from "../redux/slices/FilterSlice";
 
 import "../scss/app.scss";
 import Categories from "../Components/Categories";
@@ -18,6 +18,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const categoryId = useSelector((state) => state.FilterSlice.categoryId);
   const sortType = useSelector((state) => state.FilterSlice.sort.sortProperty);
+  const currentPage = useSelector((state) => state.FilterSlice.currentPage);
 
   //Use the useContext hook to track changes in the { searchValue } value, avoiding the need for props drilling
   const { searchValue } = useContext(searchContext);
@@ -25,10 +26,14 @@ const Home = () => {
   const [items, setItems] = useState([]); //use hook to render cards when it were got from server
   const [isLoading, setIsLoading] = useState(true); //use hook to render skeleton
 
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
 
   const onClickCategory = (id) => {
     dispatch(setCategoryId(id));
+  };
+
+  const onChangePage = (number) => {
+    dispatch(setCurrentPage(number));
   };
 
   useEffect(() => {
@@ -46,7 +51,6 @@ const Home = () => {
         `https://6704f473031fd46a830e0b4e.mockapi.io/items?page=${currentPage}&limit=6&${category}sortBy=${replace}&order=${sort}${search}`,
       )
       .then((res) => {
-        console.log("response", res);
         setItems(res.data); //set status to render content
         setIsLoading(false);
       })
@@ -73,7 +77,7 @@ const Home = () => {
         </div>
         <h2 className="content__title" />
         <div className="content__items">{isLoading ? skeleton : noodles}</div>
-        <Pagination changePage={(number) => setCurrentPage(number)} />
+        <Pagination currentPage={currentPage} changePage={onChangePage} />
       </div>
     </>
   );

@@ -8,9 +8,6 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/stereogamm/web-shop?style=for-the-badge&labelColor=%235d57cd&color=%235d57cd)
 
 
-
-
-
 ![Repo Card](https://github-readme-stats.vercel.app/api/pin/?username=stereogamm&repo=web-shop&theme=ambient_gradient&show_owner=true&hide=issues)
 
 

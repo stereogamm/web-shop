@@ -1,17 +1,39 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import debounce from "lodash.debounce";
 
 import styles from "./search.module.scss";
 import { searchContext } from "../../App";
 
 const Search = () => {
+  const [value, setValue] = useState("");
   //Use the useContext hook to track changes in the { searchValue, setSearchValue } values, avoiding the need for props drilling
-  const { searchValue, setSearchValue } = useContext(searchContext);
+  const { setSearchValue } = useContext(searchContext);
+  const inputRef = useRef();
+
+  const onClickClear = () => {
+    setSearchValue("");
+    setValue("");
+    inputRef.current.focus();
+  };
+
+  const updateSearchValue = useCallback(
+    debounce((str) => {
+      setSearchValue(str);
+    }, 750),
+    [],
+  );
+
+  const onChangeInput = (event) => {
+    setValue(event.target.value);
+    updateSearchValue(event.target.value);
+  };
 
   return (
     <>
       <label htmlFor="search" className={styles.label}>
         <input
+          ref={inputRef}
           id="search"
           className={styles.input}
           placeholder="Search..."
@@ -22,14 +44,14 @@ const Search = () => {
           maxLength="20"
           aria-label="Search for your favorite ramen"
           role="searchbox"
-          value={searchValue}
-          onChange={(event) => setSearchValue(event.target.value)}
+          value={value}
+          onChange={onChangeInput}
         />
-        {searchValue && (
+        {value && (
           <svg
             className={styles.empty__icon}
             viewBox="0 0 600 600"
-            onClick={() => setSearchValue("")}
+            onClick={() => onClickClear()}
           >
             <g id="Waste_management">
               <path d="M392,227.8a26.45,26.45,0,0,0-19.77-8.89H358.86c-7.69-11.32-29.49-19.49-55.21-19.49a105.22,105.22,0,0,0-32.38,4.81,27.21,27.21,0,0,1-17,0,105,105,0,0,0-32.36-4.81c-25.72,0-47.52,8.17-55.21,19.49H152.17a26.44,26.44,0,0,0-26.32,29l17.83,199.74a23.55,23.55,0,0,0,23.51,21.29H353.5A23.64,23.64,0,0,0,377,448.12l21.52-199.68A26.52,26.52,0,0,0,392,227.8ZM380.6,246.36,359.08,446a5.62,5.62,0,0,1-5.58,4.92H167.19a5.59,5.59,0,0,1-5.59-5L143.78,246.27v-.08a8.44,8.44,0,0,1,8.4-9.28H372.22a8.45,8.45,0,0,1,8.38,9.45Z" />
