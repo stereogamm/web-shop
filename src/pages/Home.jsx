@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setCategoryId } from "../redux/slices/FilterSlice";
@@ -40,18 +41,20 @@ const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
 
     //request with filter queries
-    fetch(
-      `https://6704f473031fd46a830e0b4e.mockapi.io/items?page=${currentPage}&limit=6&${category}sortBy=${replace}&order=${sort}${search}`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setItems(data); //set status to render content
+    axios
+      .get(
+        `https://6704f473031fd46a830e0b4e.mockapi.io/items?page=${currentPage}&limit=6&${category}sortBy=${replace}&order=${sort}${search}`,
+      )
+      .then((res) => {
+        console.log("response", res);
+        setItems(res.data); //set status to render content
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error is: ", error);
+        console.log("Error is: ", error);
         setIsLoading(false);
       });
+
     window.scrollTo({ top: 0, behavior: "smooth" }); //to make scroll smoothely
   }, [categoryId, sortType, searchValue, currentPage]);
 
