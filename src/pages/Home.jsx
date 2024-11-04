@@ -1,10 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 import axios from "axios";
+import qs from "qs"; // lib qs to create query string
+import { useNavigate } from "react-router-dom"; //use this function to navigate inline with query params
 
 import { useSelector, useDispatch } from "react-redux";
-import { setCategoryId, setCurrentPage } from "../redux/slices/FilterSlice";
+import {
+  setCategoryId,
+  setCurrentPage,
+  setFilters,
+} from "../redux/slices/FilterSlice";
 
 import "../scss/app.scss";
 import Categories from "../Components/Categories";
@@ -13,9 +19,14 @@ import Sort from "../Components/Sort";
 import SkeletonCard from "../Components/Card/SkeletonCard";
 import Pagination from "../Components/Pagination/index";
 import { searchContext } from "../App";
+import { list } from "../Components/Sort";
 
 const Home = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isSearch = useRef(false);
+  const isMounted = useRef(false);
+
   const categoryId = useSelector((state) => state.FilterSlice.categoryId);
   const sortType = useSelector((state) => state.FilterSlice.sort.sortProperty);
   const currentPage = useSelector((state) => state.FilterSlice.currentPage);
@@ -26,8 +37,6 @@ const Home = () => {
   const [items, setItems] = useState([]); //use hook to render cards when it were got from server
   const [isLoading, setIsLoading] = useState(true); //use hook to render skeleton
 
-  // const [currentPage, setCurrentPage] = useState(1);
-
   const onClickCategory = (id) => {
     dispatch(setCategoryId(id));
   };
@@ -36,7 +45,7 @@ const Home = () => {
     dispatch(setCurrentPage(number));
   };
 
-  useEffect(() => {
+  const fetchRamens = () => {
     setIsLoading(true); //set status to render skeleton
 
     //variables to create different search params (filtering by back-end)
@@ -58,8 +67,41 @@ const Home = () => {
         console.log("Error is: ", error);
         setIsLoading(false);
       });
+  };
 
+  //use this hook to create query string consists of parameters
+  //If it’s not the first render, there’s no need to pass parameters into the URL string
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortType,
+        categoryId,
+        currentPage,
+      });
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [categoryId, sortType, searchValue, currentPage]);
+
+  //use this hook  if we have data into search params - we will parse it and rebuild it to an object
+  //If it’s the first render, check the URL and save the parameters to Redux
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const sort = list.find((obj) => obj.sortProperty === params.sortType);
+
+      dispatch(setFilters({ ...params, sort }));
+      isSearch.current = false;
+    }
+  }, []);
+
+  useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" }); //to make scroll smoothely
+
+    if (!isSearch.current) {
+      fetchRamens();
+    }
+    isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
 
   const noodles = items.map((obj) => <Card key={uuidv4()} {...obj} />);

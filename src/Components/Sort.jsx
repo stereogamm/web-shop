@@ -3,19 +3,19 @@ import { v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from "react-redux";
 import { setSort } from "../redux/slices/FilterSlice";
 
+export const list = [
+  { name: "rating 🔝", sortProperty: "rating" },
+  { name: "price 🔻", sortProperty: "price" },
+  { name: "price 🔺", sortProperty: "-price" },
+  { name: "z - a", sortProperty: "title" },
+  { name: "a - z", sortProperty: "-title" },
+];
+
 function Sort() {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.FilterSlice.sort);
 
   const [visible, setVisible] = useState(false);
-
-  const list = [
-    { name: "rating 🔝", sortProperty: "rating" },
-    { name: "price 🔻", sortProperty: "price" },
-    { name: "price 🔺", sortProperty: "-price" },
-    { name: "z - a", sortProperty: "title" },
-    { name: "a - z", sortProperty: "-title" },
-  ];
 
   const changeSortList = () => {
     setVisible(!visible);
