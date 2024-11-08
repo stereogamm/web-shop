@@ -2,16 +2,33 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 import image from "../../../public/assets/images/ramen_4.png";
+import { useDispatch } from "react-redux";
 
-function Card({ price, title, sizes, types }) {
+import { addItem } from "../../redux/slices/BasketSlice";
+
+function Card({ price, title, sizes, types, id }) {
+  const dispatch = useDispatch();
+
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
   const [count, setCount] = useState(0);
 
   const isSpicy = ["SPICY", "NO SPICY"];
 
-  const addPizza = () => {
+  const addRamen = () => {
     setCount(count + 1);
+  };
+
+  const onClickAdd = () => {
+    const item = {
+      id,
+      price,
+      type: activeType,
+      size: activeSize,
+      title,
+    };
+    dispatch(addItem(item));
+    addRamen();
   };
 
   return (
@@ -47,7 +64,8 @@ function Card({ price, title, sizes, types }) {
           <div className="ramen-block__price">{price} btc</div>
           <button
             className="button button--outline button--add"
-            onClick={addPizza}
+            // onClick={addRamen}
+            onClick={onClickAdd}
           >
             <svg
               width="12"
@@ -73,6 +91,7 @@ Card.propTypes = {
   price: PropTypes.number.isRequired,
   sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
   types: PropTypes.arrayOf(PropTypes.number).isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default Card;

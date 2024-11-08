@@ -10,7 +10,7 @@ import {
   setCategoryId,
   setCurrentPage,
   setFilters,
-} from "../redux/slices/FilterSlice";
+} from "../redux/slices/FilterSlice"; // Redux actions
 
 import "../scss/app.scss";
 import Categories from "../Components/Categories";
@@ -18,14 +18,14 @@ import Card from "../Components/Card/Card";
 import Sort from "../Components/Sort";
 import SkeletonCard from "../Components/Card/SkeletonCard";
 import Pagination from "../Components/Pagination/index";
-import { searchContext } from "../App";
+import { searchContext } from "../App"; // Context to manage search state globally
 import { list } from "../Components/Sort";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isSearch = useRef(false);
-  const isMounted = useRef(false);
+  const isSearch = useRef(false); // Track if it's a search to prevent initial fetch
+  const isMounted = useRef(false); // Track if it's the first render
 
   const categoryId = useSelector((state) => state.FilterSlice.categoryId);
   const sortType = useSelector((state) => state.FilterSlice.sort.sortProperty);
@@ -37,14 +37,17 @@ const Home = () => {
   const [items, setItems] = useState([]); //use hook to render cards when it were got from server
   const [isLoading, setIsLoading] = useState(true); //use hook to render skeleton
 
+  // Dispatch action to set selected category
   const onClickCategory = (id) => {
     dispatch(setCategoryId(id));
   };
 
+  // Dispatch action to set current page
   const onChangePage = (number) => {
     dispatch(setCurrentPage(number));
   };
 
+  // Fetch data from API with applied filters
   const fetchRamens = () => {
     setIsLoading(true); //set status to render skeleton
 

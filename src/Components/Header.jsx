@@ -2,10 +2,13 @@ import React from "react";
 import logo from "../../public/assets/images/logo_red.svg";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 import Search from "./Search";
 
 function Header() {
+  const { items, totalPrice } = useSelector((state) => state.BasketSlice);
+
   return (
     <div className="header">
       <div className="container">
@@ -23,7 +26,7 @@ function Header() {
         <Search />
         <div className="header__cart">
           <Link to="/basket" className="button button--cart">
-            <span>btc</span>
+            <span>{totalPrice} btc</span>
             <div className="button__delimiter" />
             <svg
               width="18"
@@ -55,6 +58,7 @@ function Header() {
               />
             </svg>
             <span />
+            <span>{items.length}</span>
           </Link>
         </div>
       </div>

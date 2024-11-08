@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from "react-redux";
 import { setSort } from "../redux/slices/FilterSlice";
@@ -14,6 +14,7 @@ export const list = [
 function Sort() {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.FilterSlice.sort);
+  const sortRef = useRef();
 
   const [visible, setVisible] = useState(false);
 
@@ -26,8 +27,24 @@ function Sort() {
     setVisible(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sortRef.current && !sortRef.current.contains(event.target)) {
+        setVisible(false);
+      }
+    };
+
+    //add event listener
+    document.body.addEventListener("click", handleClickOutside);
+
+    //remove event listener - because this function will be called always to cleanup EventListener
+    return () => {
+      document.body.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           className={visible ? "rotate" : "rotate_out"}
