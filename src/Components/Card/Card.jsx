@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 import image from "../../../public/assets/images/ramen_4.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { addItem } from "../../redux/slices/BasketSlice";
 
 function Card({ price, title, sizes, types, id }) {
   const dispatch = useDispatch();
+  const ramenCount = useSelector((state) => {
+    const item = state.BasketSlice.items.find((obj) => obj.id == id);
+    return item || {};
+  });
+
+  const addedCount = ramenCount ? ramenCount.count : 0;
 
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
@@ -23,7 +29,7 @@ function Card({ price, title, sizes, types, id }) {
     const item = {
       id,
       price,
-      type: activeType,
+      type: isSpicy[activeType],
       size: activeSize,
       title,
     };
@@ -64,7 +70,6 @@ function Card({ price, title, sizes, types, id }) {
           <div className="ramen-block__price">{price} btc</div>
           <button
             className="button button--outline button--add"
-            // onClick={addRamen}
             onClick={onClickAdd}
           >
             <svg
@@ -77,7 +82,7 @@ function Card({ price, title, sizes, types, id }) {
               <path />
             </svg>
             <span>Add Yum </span>
-            <i>{count}</i>
+            {addedCount > 0 && <i>{addedCount}</i>}
           </button>
         </div>
       </div>
