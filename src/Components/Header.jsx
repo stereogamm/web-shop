@@ -9,6 +9,8 @@ import Search from "./Search";
 function Header() {
   const { items, totalPrice } = useSelector((state) => state.BasketSlice);
 
+  const totalcount = items.reduce((sum, item) => sum + item.count, 0);
+
   return (
     <div className="header">
       <div className="container">
@@ -58,7 +60,7 @@ function Header() {
               />
             </svg>
             <span />
-            <span>{items.length}</span>
+            <span>{totalcount}</span>
           </Link>
         </div>
       </div>
