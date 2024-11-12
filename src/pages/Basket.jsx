@@ -1,26 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import BasketItem from "../Components/BasketItem";
-
-// import styles from "../Components/NotFoundBlock/notFoundBlock.module.scss";
-
-//TODO: to implement an empty basket logic
-// const Basket = () => (
-//   <div className={styles.root}>
-//     <span>🫙</span>
-//     <h1>Empty cart, empty heart</h1>
-//     <p>*Don’t worry, a little shopping will fix that</p>
-//     <Link to="/" className={styles.btn__home} aria-label="return to main page">
-//       сlick here to return to base
-//     </Link>
-//   </div>
-// );
+import { clearItems } from "../redux/slices/BasketSlice";
+import EmptyBasket from "../Components/EmptyBasket";
 
 //TODO: to add media queries for adaptive layout (min 375px)
 const Basket = () => {
-  // const dispatch = useDispatch();
-  const items = useSelector((state) => state.BasketSlice.items);
+  const dispatch = useDispatch();
+
+  const { totalPrice, items } = useSelector((state) => state.BasketSlice);
+  const totalcount = items.reduce((sum, item) => sum + item.count, 0);
+  const onClickClearBasket = () => {
+    if (window.confirm("🐲 Do you want to clear basket 🐲?")) {
+      dispatch(clearItems());
+    }
+  };
+
+  if (!totalPrice) {
+    return <EmptyBasket />;
+  }
 
   return (
     <div className="container container--cart">
@@ -58,7 +57,7 @@ const Basket = () => {
             </svg>
             Basket
           </h2>
-          <div className="cart__clear">
+          <div onClick={onClickClearBasket} className="cart__clear">
             <svg
               width="20"
               height="20"
@@ -107,11 +106,11 @@ const Basket = () => {
             <div className="cart__bottom-details">
               <span>
                 {" "}
-                Order: <b>5</b>{" "}
+                Order: <b>{totalcount}</b>{" "}
               </span>
               <span>
                 {" "}
-                Total: <b>5</b>{" "}
+                Total: <b>{totalPrice} btc</b>{" "}
               </span>
             </div>
             <div className="cart__bottom-buttons">
@@ -120,23 +119,7 @@ const Basket = () => {
                 className="button button--outline button--add go-back-btn"
                 aria-label="return to main page"
               >
-                <svg
-                  width="8"
-                  height="14"
-                  viewBox="0 0 8 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7 13L1 6.93015L6.86175 1"
-                    stroke="#D3D3D3"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-
-                <span>to return</span>
+                <span>return to main page</span>
               </Link>
               <div className="button pay-btn">
                 <span>to pay now</span>

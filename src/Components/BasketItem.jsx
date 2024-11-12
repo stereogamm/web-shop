@@ -2,7 +2,7 @@ import React from "react";
 import image from "../../public/assets/images/ramen_4.png";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { addItem, minusItem } from "../redux/slices/BasketSlice";
+import { addItem, minusItem, removeItem } from "../redux/slices/BasketSlice";
 
 const BasketItem = ({ id, title, price, count, type, size }) => {
   const dispatch = useDispatch();
@@ -17,6 +17,14 @@ const BasketItem = ({ id, title, price, count, type, size }) => {
 
   const onClickMinus = () => {
     dispatch(minusItem(id));
+  };
+
+  const onClickRemove = () => {
+    if (
+      window.confirm("🐲 Do you really want to delete ramen from basket 🐲?")
+    ) {
+      dispatch(removeItem(id));
+    }
   };
 
   return (
@@ -78,7 +86,7 @@ const BasketItem = ({ id, title, price, count, type, size }) => {
       <div className="cart__item-price">
         <b>{price * count} btc</b>
       </div>
-      <div className="cart__item-remove">
+      <div onClick={onClickRemove} className="cart__item-remove">
         <div className="button button--outline button--circle">
           <svg
             width="10"
@@ -105,7 +113,7 @@ const BasketItem = ({ id, title, price, count, type, size }) => {
 export default BasketItem;
 
 BasketItem.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.number,
   title: PropTypes.string,
   price: PropTypes.number,
   count: PropTypes.number,

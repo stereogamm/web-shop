@@ -249,7 +249,7 @@ body {
 
         &:last-of-type {
           b {
-            color: $orange;
+            color: $logo;
           }
         }
       }
@@ -265,21 +265,20 @@ body {
         align-items: center;
         justify-content: center;
         width: 210px;
+        color: $gray-line;
 
         border-color: color.scale($color: $gray-line, $lightness: 10%);
 
         span {
-          color: color.scale($color: $gray-line, $lightness: 20%);
-          font-weight: 500;
-          font-weight: 600;
+          color: $logo,
         }
 
         &:hover {
-          background-color: color.scale($color: $gray-line, $lightness: 90%);
-          border-color: color.scale($color: $gray-line, $lightness: 90%);
+          background-color: $logo;
+         
 
           span {
-            color: $gray-line;
+            color: white;
           }
         }
 

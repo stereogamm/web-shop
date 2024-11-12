@@ -24,12 +24,6 @@ export const basketSlice = createSlice({
         0,
       );
     },
-    // plusItem(state, action) {
-    //   const findItem = state.items.find((obj) => obj.id == action.payload);
-    //   if (findItem) {
-    //     findItem.count++;
-    //   }
-    // },
     minusItem(state, action) {
       const findItem = state.items.find((obj) => obj.id == action.payload);
       if (findItem) {
@@ -41,6 +35,7 @@ export const basketSlice = createSlice({
     },
     clearItems(state) {
       state.items = [];
+      state.totalPrice = 0;
     },
   },
 });

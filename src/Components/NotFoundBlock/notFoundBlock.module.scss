@@ -1,3 +1,6 @@
+@use "sass:color";
+@import "../../scss/variables";
+
 .root {
   text-align: center;
   padding: 50px;
@@ -7,7 +10,7 @@
   span {
     font-size: 54px;
   }
-  
+
   p {
     color: #847c7c;
     margin-top: 40px;
@@ -23,8 +26,8 @@
     margin-top: 50px;
     display: inline-block;
     padding: 15px 30px;
-    background-color: #f5edd3; 
-    color: #7c6e6e;
+    background-color: $logo;
+    color: white;
     font-size: 16px;
     font-weight: bold;
     text-decoration: none;
@@ -32,16 +35,18 @@
     transition: background-color 0.3s ease;
     text-align: center;
     text-transform: uppercase;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition:
+      background-color 0.3s ease,
+      transform 0.2s ease;
   }
 
   .btn__home:hover {
-    background-color: #f8e7bd;
+    background-color: $logo;
+    color: white;
   }
 
   .btn__home:active {
     transform: scale(0.98);
-    background-color: #e9e2c0;
+    background-color: $gray-line;
   }
-
 }

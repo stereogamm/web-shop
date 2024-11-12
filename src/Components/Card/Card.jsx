@@ -20,7 +20,6 @@ function Card({ price, title, sizes, types, id }) {
   const [count, setCount] = useState(0);
 
   const isSpicy = ["NO Spicy", "Spicy"];
-  const isSize = ["small", "medium", "big"];
 
   const addRamen = () => {
     setCount(count + 1);
@@ -31,7 +30,7 @@ function Card({ price, title, sizes, types, id }) {
       id,
       price,
       type: isSpicy[activeType],
-      size: isSize[activeSize],
+      size: sizes[activeSize],
       title,
     };
     dispatch(addItem(item));
