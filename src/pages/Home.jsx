@@ -48,7 +48,7 @@ const Home = () => {
   };
 
   // Fetch data from API with applied filters
-  const fetchRamens = () => {
+  const fetchRamens = async () => {
     setIsLoading(true); //set status to render skeleton
 
     //variables to create different search params (filtering by back-end)
@@ -57,19 +57,19 @@ const Home = () => {
     const replace = sortType.replace("-", "");
     const search = searchValue ? `&search=${searchValue}` : "";
 
-    //request with filter queries
-    axios
-      .get(
+    // request with filter queries
+    try {
+      const res = await axios.get(
         `https://6704f473031fd46a830e0b4e.mockapi.io/items?page=${currentPage}&limit=6&${category}sortBy=${replace}&order=${sort}${search}`,
-      )
-      .then((res) => {
-        setItems(res.data); //set status to render content
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log("Error is: ", error);
-        setIsLoading(false);
-      });
+      );
+      setItems(res.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log("Error is: ", error);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   //use this hook to create query string consists of parameters
