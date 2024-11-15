@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
-import axios from "axios";
+// import axios from "axios";
 import qs from "qs"; // lib qs to create query string
 import { useNavigate } from "react-router-dom"; //use this function to navigate inline with query params
 
@@ -20,6 +20,7 @@ import SkeletonCard from "../Components/Card/SkeletonCard";
 import Pagination from "../Components/Pagination/index";
 import { searchContext } from "../App"; // Context to manage search state globally
 import { list } from "../Components/Sort";
+import { getRamens } from "../redux/slices/RamensSlice";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -27,14 +28,15 @@ const Home = () => {
   const isSearch = useRef(false); // Track if it's a search to prevent initial fetch
   const isMounted = useRef(false); // Track if it's the first render
 
-  const categoryId = useSelector((state) => state.FilterSlice.categoryId);
-  const sortType = useSelector((state) => state.FilterSlice.sort.sortProperty);
-  const currentPage = useSelector((state) => state.FilterSlice.currentPage);
+  const categoryId = useSelector((state) => state.filterSlice.categoryId);
+  const sortType = useSelector((state) => state.filterSlice.sort.sortProperty);
+  const currentPage = useSelector((state) => state.filterSlice.currentPage);
+  const items = useSelector((state) => state.ramensSlice.items);
 
   //Use the useContext hook to track changes in the { searchValue } value, avoiding the need for props drilling
   const { searchValue } = useContext(searchContext);
 
-  const [items, setItems] = useState([]); //use hook to render cards when it were got from server
+  // const [items, setItems] = useState([]); //use hook to render cards when it were got from server
   const [isLoading, setIsLoading] = useState(true); //use hook to render skeleton
 
   // Dispatch action to set selected category
@@ -59,10 +61,15 @@ const Home = () => {
 
     // request with filter queries
     try {
-      const res = await axios.get(
-        `https://6704f473031fd46a830e0b4e.mockapi.io/items?page=${currentPage}&limit=6&${category}sortBy=${replace}&order=${sort}${search}`,
+      dispatch(
+        getRamens({
+          category,
+          sort,
+          replace,
+          search,
+          currentPage,
+        }),
       );
-      setItems(res.data);
       setIsLoading(false);
     } catch (error) {
       console.log("Error is: ", error);

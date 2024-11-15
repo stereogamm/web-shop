@@ -9,7 +9,7 @@ import { addItem } from "../../redux/slices/BasketSlice";
 function Card({ price, title, sizes, types, id }) {
   const dispatch = useDispatch();
   const ramenCount = useSelector((state) => {
-    const item = state.BasketSlice.items.find((obj) => obj.id == id);
+    const item = state.basketSlice.items.find((obj) => obj.id == id);
     return item || {};
   });
 

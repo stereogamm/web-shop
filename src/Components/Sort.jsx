@@ -13,7 +13,7 @@ export const list = [
 
 function Sort() {
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.FilterSlice.sort);
+  const sort = useSelector((state) => state.filterSlice.sort);
   const sortRef = useRef();
 
   const [visible, setVisible] = useState(false);

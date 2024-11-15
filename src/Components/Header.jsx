@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import Search from "./Search";
 
 function Header() {
-  const { items, totalPrice } = useSelector((state) => state.BasketSlice);
+  const { items, totalPrice } = useSelector((state) => state.basketSlice);
 
   const totalcount = items.reduce((sum, item) => sum + item.count, 0);
 
