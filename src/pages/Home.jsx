@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 // import axios from "axios";
@@ -31,13 +31,11 @@ const Home = () => {
   const categoryId = useSelector((state) => state.filterSlice.categoryId);
   const sortType = useSelector((state) => state.filterSlice.sort.sortProperty);
   const currentPage = useSelector((state) => state.filterSlice.currentPage);
-  const items = useSelector((state) => state.ramensSlice.items);
+
+  const { items, status } = useSelector((state) => state.ramensSlice);
 
   //Use the useContext hook to track changes in the { searchValue } value, avoiding the need for props drilling
   const { searchValue } = useContext(searchContext);
-
-  // const [items, setItems] = useState([]); //use hook to render cards when it were got from server
-  const [isLoading, setIsLoading] = useState(true); //use hook to render skeleton
 
   // Dispatch action to set selected category
   const onClickCategory = (id) => {
@@ -51,8 +49,6 @@ const Home = () => {
 
   // Fetch data from API with applied filters
   const fetchRamens = async () => {
-    setIsLoading(true); //set status to render skeleton
-
     //variables to create different search params (filtering by back-end)
     const category = categoryId > 0 ? `category=${categoryId}&` : "";
     const sort = sortType.startsWith("-") ? "asc" : "desc";
@@ -60,23 +56,15 @@ const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
 
     // request with filter queries
-    try {
-      dispatch(
-        getRamens({
-          category,
-          sort,
-          replace,
-          search,
-          currentPage,
-        }),
-      );
-      setIsLoading(false);
-    } catch (error) {
-      console.log("Error is: ", error);
-      setIsLoading(false);
-    } finally {
-      setIsLoading(false);
-    }
+    dispatch(
+      getRamens({
+        category,
+        sort,
+        replace,
+        search,
+        currentPage,
+      })
+    );
   };
 
   //use this hook to create query string consists of parameters
@@ -127,8 +115,16 @@ const Home = () => {
           <Categories value={categoryId} onClickCategory={onClickCategory} />
           <Sort />
         </div>
-        <h2 className="content__title" />
-        <div className="content__items">{isLoading ? skeleton : noodles}</div>
+        {status === "error" ? (
+          <div className="content__error">
+            <h2>Error occurs</h2>
+            <p>You can try to order ramen later</p>
+          </div>
+        ) : (
+          <div className="content__items">
+            {status === "loading" ? skeleton : noodles}
+          </div>
+        )}
         <Pagination currentPage={currentPage} changePage={onChangePage} />
       </div>
     </>
