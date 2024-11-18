@@ -16,10 +16,10 @@ export const getRamens = createAsyncThunk(
 
     // sending a GET request to mockAPI to fetch the data
     const res = await axios.get(
-      `https://6704f473031fd46a830e0b4e.mockapi.io/items?page=${currentPage}&limit=6&${category}sortBy=${replace}&order=${sort}${search}`
+      `https://6704f473031fd46a830e0b4e.mockapi.io/items?page=${currentPage}&limit=6&${category}sortBy=${replace}&order=${sort}${search}`,
     );
     return res.data;
-  }
+  },
 );
 
 export const ramensSlice = createSlice({

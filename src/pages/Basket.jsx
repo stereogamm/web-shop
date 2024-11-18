@@ -9,7 +9,7 @@ import EmptyBasket from "../Components/EmptyBasket";
 const Basket = () => {
   const dispatch = useDispatch();
 
-  const { totalPrice, items } = useSelector((state) => state.BasketSlice);
+  const { totalPrice, items } = useSelector((state) => state.basketSlice);
   const totalcount = items.reduce((sum, item) => sum + item.count, 0);
   const onClickClearBasket = () => {
     if (window.confirm("🐲 Do you want to clear basket 🐲?")) {

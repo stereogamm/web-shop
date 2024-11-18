@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
-// import axios from "axios";
 import qs from "qs"; // lib qs to create query string
 import { useNavigate } from "react-router-dom"; //use this function to navigate inline with query params
 
@@ -63,7 +62,7 @@ const Home = () => {
         replace,
         search,
         currentPage,
-      })
+      }),
     );
   };
 
