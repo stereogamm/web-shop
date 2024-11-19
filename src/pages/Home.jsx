@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 import qs from "qs"; // lib qs to create query string
@@ -17,9 +17,15 @@ import Card from "../Components/Card/Card";
 import Sort from "../Components/Sort";
 import SkeletonCard from "../Components/Card/SkeletonCard";
 import Pagination from "../Components/Pagination/index";
-import { searchContext } from "../App"; // Context to manage search state globally
 import { list } from "../Components/Sort";
 import { getRamens } from "../redux/slices/RamensSlice";
+import {
+  selectFiltersCategory,
+  selectFiltersSortProperty,
+  selectFiltersCurrentPage,
+  selectSearchValue,
+} from "../redux/slices/FilterSlice";
+import { RamenSliceSelector } from "../redux/slices/RamensSlice";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -27,14 +33,12 @@ const Home = () => {
   const isSearch = useRef(false); // Track if it's a search to prevent initial fetch
   const isMounted = useRef(false); // Track if it's the first render
 
-  const categoryId = useSelector((state) => state.filterSlice.categoryId);
-  const sortType = useSelector((state) => state.filterSlice.sort.sortProperty);
-  const currentPage = useSelector((state) => state.filterSlice.currentPage);
+  const categoryId = useSelector(selectFiltersCategory);
+  const sortType = useSelector(selectFiltersSortProperty);
+  const currentPage = useSelector(selectFiltersCurrentPage);
+  const searchValue = useSelector(selectSearchValue);
 
-  const { items, status } = useSelector((state) => state.ramensSlice);
-
-  //Use the useContext hook to track changes in the { searchValue } value, avoiding the need for props drilling
-  const { searchValue } = useContext(searchContext);
+  const { items, status } = useSelector(RamenSliceSelector);
 
   // Dispatch action to set selected category
   const onClickCategory = (id) => {

@@ -51,6 +51,9 @@ export const ramensSlice = createSlice({
   },
 });
 
+//get info from this slice and use it in other slices
+export const RamenSliceSelector = (state) => state.ramensSlice;
+
 // exporting the action for manually updating items
 export const { setItems } = ramensSlice.actions;
 

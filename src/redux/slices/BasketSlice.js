@@ -40,6 +40,9 @@ export const basketSlice = createSlice({
   },
 });
 
+//selector to get info from this slice and use it in the different components
+export const basketSelector = (state) => state.basketSlice;
+
 export const { addItem, removeItem, clearItems, minusItem } =
   basketSlice.actions;
 

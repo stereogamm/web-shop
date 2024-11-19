@@ -4,12 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import BasketItem from "../Components/BasketItem";
 import { clearItems } from "../redux/slices/BasketSlice";
 import EmptyBasket from "../Components/EmptyBasket";
+import { basketSelector } from "../redux/slices/BasketSlice";
 
 //TODO: to add media queries for adaptive layout (min 375px)
 const Basket = () => {
   const dispatch = useDispatch();
 
-  const { totalPrice, items } = useSelector((state) => state.basketSlice);
+  const { totalPrice, items } = useSelector(basketSelector);
   const totalcount = items.reduce((sum, item) => sum + item.count, 0);
   const onClickClearBasket = () => {
     if (window.confirm("🐲 Do you want to clear basket 🐲?")) {

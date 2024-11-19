@@ -1,24 +1,24 @@
-import React, { useCallback, useContext, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 // Importing lodash's debounce function to delay search input updates
 import debounce from "lodash.debounce";
+import { setSearchValue } from "../../redux/slices/FilterSlice";
 
 import styles from "./search.module.scss";
-import { searchContext } from "../../App";
 
 const Search = () => {
+  const dispatch = useDispatch();
+
   // Local state to manage the input's current value
   const [value, setValue] = useState("");
-
-  //Use the useContext hook to track changes in the { searchValue, setSearchValue } values, avoiding the need for props drilling
-  const { setSearchValue } = useContext(searchContext);
 
   // useRef for referencing the input element directly, enabling focus control
   const inputRef = useRef();
 
   // Handler to clear the input and focus the cursor back in the input field
   const onClickClear = () => {
-    setSearchValue("");
+    dispatch(setSearchValue(""));
     setValue("");
     inputRef.current.focus();
   };
@@ -26,7 +26,7 @@ const Search = () => {
   // Memoized function to debounce the update of the search value in context
   const updateSearchValue = useCallback(
     debounce((str) => {
-      setSearchValue(str);
+      dispatch(setSearchValue(str));
     }, 750), // Empty dependency array to ensure the function is only created once
     [],
   );

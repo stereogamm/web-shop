@@ -3,11 +3,12 @@ import logo from "../../public/assets/images/logo_red.svg";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
+import { basketSelector } from "../redux/slices/BasketSlice";
 
 import Search from "./Search";
 
 function Header() {
-  const { items, totalPrice } = useSelector((state) => state.basketSlice);
+  const { items, totalPrice } = useSelector(basketSelector);
 
   const totalcount = items.reduce((sum, item) => sum + item.count, 0);
 

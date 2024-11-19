@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  searchValue: "",
   categoryId: 0,
   currentPage: 1,
   sort: {
@@ -17,6 +18,9 @@ export const filterSlice = createSlice({
     setCategoryId(state, action) {
       state.categoryId = action.payload;
     },
+    setSearchValue(state, action) {
+      state.searchValue = action.payload;
+    },
     setSort(state, action) {
       state.sort = action.payload;
     },
@@ -31,9 +35,23 @@ export const filterSlice = createSlice({
   },
 });
 
+//selectors to use it into the different components
+export const selectFiltersCategory = (state) => state.filterSlice.categoryId;
+export const selectFiltersSortProperty = (state) =>
+  state.filterSlice.sort.sortProperty;
+export const selectFiltersCurrentPage = (state) =>
+  state.filterSlice.currentPage;
+export const selectSort = (state) => state.filterSlice.sort;
+export const selectSearchValue = (state) => state.filterSlice.searchValue;
+
 // Action creators are generated for each case reducer function
 // By default reducer will be exported, but if we need - we can use any actions as we want
-export const { setCategoryId, setSort, setCurrentPage, setFilters } =
-  filterSlice.actions;
+export const {
+  setCategoryId,
+  setSort,
+  setCurrentPage,
+  setFilters,
+  setSearchValue,
+} = filterSlice.actions;
 
 export default filterSlice.reducer;
