@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: path.resolve(__dirname, './src/index.js'),
+  entry: path.resolve(__dirname, './src/index.tsx'),
   module: {
     rules: [
       {
@@ -38,9 +38,9 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',    // Внедряет CSS в DOM
-          'css-loader',      // Преобразует CSS в CommonJS
-          'sass-loader'      // Компилирует SCSS в CSS
+          'style-loader',    // incorporates CSS into DOM
+          'css-loader',      //  CSS => CommonJS
+          'sass-loader'      // compiles SCSS into CSS
         ],
       },
       {
@@ -58,7 +58,7 @@ module.exports = {
   },
   plugins: [
     new ESLintPlugin({
-      extensions: ['.js', '.jsx']
+      extensions: ['.tsx', '.ts', '.js', '.jsx']
     }),
     new HtmlWebpackPlugin({
       template: './index.html'
@@ -67,15 +67,16 @@ module.exports = {
   ],
   resolve: {
     extensions: [
-      '.*',
-      '.js',
-      '.jsx',
-      '.json',
-      '.css',
-      '.scss', 
-      '.png',
-      '.svg',
-      '.jpg'
+    '.tsx',
+    '.ts',
+    '.js',
+    '.jsx',
+    '.json',
+    '.css',
+    '.scss',
+    '.png',
+    '.svg',
+    '.jpg',
     ],
     alias: {
     }

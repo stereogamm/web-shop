@@ -14,14 +14,23 @@
 [![GH pages](https://img.shields.io/badge/GitHub-Pages-c051c1?style=for-the-badge&logo=github)]( https://stereogamm.github.io/web-shop/ )
 #### 
 ## 🍜 About the Project
-Welcome to my project 'NOODLE & BYTES'. This is a self-study project for creating an online yammy store, where I used the following libraries:  
+
+Welcome to my project 'NOODLE & BYTES'. This is a self-study project for creating an online yammy store, where I used the following tech stack: 
+
 🍥 React v18  
-🍥 React-router-dom v6  
-🍥 React-redux 9  
-🍥 Skeletonreact  
-🍥 npm  
-🍥 etc  
+🍥 Redux Toolkit (data/state management)
+🍥 React Router v6 (navigation)
+🍥 Axios + Fetch (backend requests)
+🍥 React Hooks (for state and lifecycle management)
+🍥 Prettier (code formatting)
+🍥 CSS-Modules / SCSS (styling)
+🍥 React Content Loader (skeleton loader)
+🍥 React Pagination (pagination implementation) 
+🍥 Lodash.Debounce (debouncing user input)
+🍥 npm 
+
 🉐 ...and a little bit of ramen magic. Let's get started! 
+
 ##
 🐲 The project uses Webpack as a bundler.  
 
