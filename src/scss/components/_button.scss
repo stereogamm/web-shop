@@ -1,5 +1,5 @@
-@use 'sass:color';
-@import '../_variables';
+@use "sass:color";
+@import "../_variables";
 
 .button {
   display: inline-block;
@@ -9,7 +9,9 @@
   min-width: 190px;
   text-align: center;
   cursor: pointer;
-  transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+  transition:
+    background-color $duration ease-in-out,
+    border-color $duration ease-in-out;
   border: 1px solid transparent;
   @include noselect();
 
@@ -152,31 +154,30 @@
   }
 
   @media (max-width: 414px) {
-      padding: 8px 16px; 
-      min-width: 80px; 
-      
-  
+    padding: 8px 16px;
+    min-width: 80px;
+
+    span {
+      font-size: 14px;
+    }
+
+    &--circle {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+    }
+
+    &--cart {
+      padding: 10px 20px;
+
       span {
-        font-size: 14px; 
+        font-size: 14px;
       }
-  
-      &--circle {
-        width: 28px; 
-        height: 28px;
-        min-width: 28px;
-      }
-  
-      &--cart {
-        padding: 10px 20px; 
-  
-        span {
-          font-size: 14px; 
-        }
-  
-        svg {
-          width: 16px; 
-          height: 16px;
-        }
+
+      svg {
+        width: 16px;
+        height: 16px;
       }
     }
   }
+}

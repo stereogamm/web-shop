@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
-import PropTypes from "prop-types";
 import qs from "qs"; // lib qs to create query string
 import { useNavigate } from "react-router-dom"; //use this function to navigate inline with query params
 
@@ -27,7 +26,7 @@ import {
 } from "../redux/slices/FilterSlice";
 import { RamenSliceSelector } from "../redux/slices/RamensSlice";
 
-const Home = () => {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = useRef(false); // Track if it's a search to prevent initial fetch
@@ -41,12 +40,12 @@ const Home = () => {
   const { items, status } = useSelector(RamenSliceSelector);
 
   // Dispatch action to set selected category
-  const onClickCategory = (id) => {
+  const onClickCategory = (id: number) => {
     dispatch(setCategoryId(id));
   };
 
   // Dispatch action to set current page
-  const onChangePage = (number) => {
+  const onChangePage = (number: number) => {
     dispatch(setCurrentPage(number));
   };
 
@@ -60,6 +59,7 @@ const Home = () => {
 
     // request with filter queries
     dispatch(
+      //@ts-expect-error NEED TO FIX
       getRamens({
         category,
         sort,
@@ -104,8 +104,8 @@ const Home = () => {
     }
     isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
-
-  const noodles = items.map((obj) => <Card key={uuidv4()} {...obj} />);
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const noodles = items.map((obj: any) => <Card key={uuidv4()} {...obj} />); //NEED TO FIX ANY
 
   const skeleton = [...new Array(6)].map((_, index) => (
     <SkeletonCard key={index} />
@@ -135,8 +135,3 @@ const Home = () => {
 };
 
 export default Home;
-
-Home.propTypes = {
-  searchValue: PropTypes.string,
-  setSearchValue: PropTypes.func,
-};

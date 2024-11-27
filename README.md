@@ -15,7 +15,7 @@
 #### 
 
 ## 🉐 How you can launch project 
-- Project launch on `localhost:4000` : `npm start`
+- (`localhost:4000`) Project launch: `npm start`
 - Linting: `npm run lint` 
 - To fix errors: `npm run lint:fix` 
 - Project build: `npm run build`
@@ -46,11 +46,7 @@ Welcome to my project 'NOODLE & BYTES'. This is a self-study project for creatin
 
 The project features responsive design using flex-box and grid approach and media query technology for standard screen resolutions of desktop displays, tablet screens, and mobile devices. The minimum supported screen resolution is 375 px
 
-- Project launch on `localhost:4000` : `npm start`
-- Linting: `npm run lint` 
-- To fix errors: `npm run lint:fix` 
-- Project build: `npm run build`
-- Code formatting: `npm run format`
+
 
 
 

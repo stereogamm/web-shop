@@ -1,4 +1,4 @@
-@import '../variables';
+@import "../variables";
 
 .header {
   border-bottom: 1px solid $gray-line;
@@ -10,11 +10,11 @@
     align-items: center;
     justify-content: space-between;
 
-    @media(max-width: 520px) {
+    @media (max-width: 520px) {
       flex-direction: column;
       flex-wrap: wrap;
       justify-self: space-between;
-      align-items:center;
+      align-items: center;
     }
   }
 

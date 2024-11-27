@@ -1,6 +1,5 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import PropTypes from "prop-types";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type CategoriesProps = {
@@ -36,8 +35,3 @@ const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
 };
 
 export default Categories;
-
-Categories.propTypes = {
-  value: PropTypes.number.isRequired, // should be num and required
-  onClickCategory: PropTypes.func.isRequired,
-};

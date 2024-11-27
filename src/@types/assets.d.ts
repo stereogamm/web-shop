@@ -15,3 +15,9 @@ declare module "*.scss" {
   const styles: { [key: string]: string };
   export default styles;
 }
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+declare module "lodash.debounce" {
+  const debounce: any; //NEED to Fix any type
+  export default debounce;
+}

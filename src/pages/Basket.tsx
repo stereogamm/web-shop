@@ -7,11 +7,15 @@ import EmptyBasket from "../Components/EmptyBasket";
 import { basketSelector } from "../redux/slices/BasketSlice";
 
 //TODO: to add media queries for adaptive layout (min 375px)
-const Basket = () => {
+const Basket: React.FC = () => {
   const dispatch = useDispatch();
 
   const { totalPrice, items } = useSelector(basketSelector);
-  const totalcount = items.reduce((sum, item) => sum + item.count, 0);
+  const totalcount = items.reduce(
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    (sum: number, item: any) => sum + item.count, //NEED TO FIX ANY
+    0,
+  );
   const onClickClearBasket = () => {
     if (window.confirm("🐲 Do you want to clear basket 🐲?")) {
       dispatch(clearItems());
@@ -99,7 +103,7 @@ const Basket = () => {
           </div>
         </div>
         <div className="content__items">
-          {items.map((item) => (
+          {items.map((item: any) => (
             <BasketItem key={item.id} {...item} />
           ))}
 

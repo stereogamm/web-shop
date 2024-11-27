@@ -1,5 +1,5 @@
-@use 'sass:color';
-@import '../_variables';
+@use "sass:color";
+@import "../_variables";
 
 .categories {
   ul {
@@ -9,7 +9,7 @@
 
     @media (max-width: 1400px) {
       flex-wrap: wrap;
-       
+
       li {
         margin: 10px 0;
       }

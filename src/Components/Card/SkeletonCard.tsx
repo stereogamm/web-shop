@@ -1,7 +1,7 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-const SkeletonCard = (props) => (
+const SkeletonCard: React.FC = (props) => (
   <ContentLoader
     speed={3}
     width={380}

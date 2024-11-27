@@ -1,16 +1,33 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import PropTypes from "prop-types";
 import image from "../../../public/assets/images/ramen_4.png";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addItem } from "../../redux/slices/BasketSlice";
 
-function Card({ price, title, sizes, types, id }) {
+//type for component props
+type CardPropsType = {
+  price: number;
+  title: string;
+  sizes: string[];
+  types: number[];
+  id: number;
+};
+
+//types for redux state
+type BasketItem = CardPropsType & { count: number };
+type RootState = {
+  basketSlice: {
+    items: BasketItem[];
+  };
+};
+
+const Card: React.FC<CardPropsType> = ({ price, title, sizes, types, id }) => {
   const dispatch = useDispatch();
-  const ramenCount = useSelector((state) => {
+
+  const ramenCount = useSelector((state: RootState) => {
     const item = state.basketSlice.items.find((obj) => obj.id == id);
-    return item || {};
+    return item || { count: 0 };
   });
 
   const addedCount = ramenCount ? ramenCount.count : 0;
@@ -88,15 +105,6 @@ function Card({ price, title, sizes, types, id }) {
       </div>
     </div>
   );
-}
-
-// Defined props types for component
-Card.propTypes = {
-  title: PropTypes.string.isRequired, // title should be string and required
-  price: PropTypes.number.isRequired,
-  sizes: PropTypes.arrayOf(PropTypes.string).isRequired,
-  types: PropTypes.arrayOf(PropTypes.number).isRequired,
-  id: PropTypes.number.isRequired,
 };
 
 export default Card;

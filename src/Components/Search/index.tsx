@@ -1,37 +1,42 @@
 import React, { useCallback, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import PropTypes from "prop-types";
+
 // Importing lodash's debounce function to delay search input updates
 import debounce from "lodash.debounce";
 import { setSearchValue } from "../../redux/slices/FilterSlice";
 
 import styles from "./search.module.scss";
 
-const Search = () => {
+const Search: React.FC = () => {
   const dispatch = useDispatch();
 
   // Local state to manage the input's current value
   const [value, setValue] = useState("");
 
   // useRef for referencing the input element directly, enabling focus control
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Handler to clear the input and focus the cursor back in the input field
   const onClickClear = () => {
     dispatch(setSearchValue(""));
     setValue("");
-    inputRef.current.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
+      // inputRef.current?.focus(); optional chaining - if inputRef contains current => call .focus()
+    }
   };
 
   // Memoized function to debounce the update of the search value in context
   const updateSearchValue = useCallback(
-    debounce((str) => {
+    debounce((str: string) => {
       dispatch(setSearchValue(str));
     }, 750), // Empty dependency array to ensure the function is only created once
     [],
   );
 
-  const onChangeInput = (event) => {
+  const onChangeInput = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setValue(event.target.value);
     updateSearchValue(event.target.value);
   };
@@ -47,8 +52,8 @@ const Search = () => {
           type="text"
           pattern="[A-Za-z]*"
           inputMode="text"
-          minLength="4"
-          maxLength="20"
+          minLength={4}
+          maxLength={20}
           aria-label="Search for your favorite ramen"
           role="searchbox"
           value={value}
@@ -74,8 +79,3 @@ const Search = () => {
 };
 
 export default Search;
-
-Search.propTypes = {
-  searchValue: PropTypes.string,
-  setSearchValue: PropTypes.func,
-};

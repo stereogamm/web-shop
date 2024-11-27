@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "../../public/assets/images/logo_red.svg";
 import { Link, useLocation } from "react-router-dom";
-import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { basketSelector } from "../redux/slices/BasketSlice";
 
@@ -81,8 +80,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-
-Header.propTypes = {
-  searchValue: PropTypes.string,
-  setSearchValue: PropTypes.func,
-};

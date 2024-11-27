@@ -1,4 +1,4 @@
-@import '../variables';
+@import "../variables";
 
 .sort {
   position: relative;
@@ -64,7 +64,7 @@
     }
   }
 
-  @media(max-width: 1400px) {
+  @media (max-width: 1400px) {
     display: flex;
     flex-direction: row;
     align-self: start;
