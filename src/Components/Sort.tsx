@@ -4,7 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSort } from "../redux/slices/FilterSlice";
 import { selectSort } from "../redux/slices/FilterSlice";
 
-export const list = [
+type ListItem = {
+  name: string;
+  sortProperty: string;
+};
+
+export const list: ListItem[] = [
   { name: "rating 🔝", sortProperty: "rating" },
   { name: "price 🔻", sortProperty: "price" },
   { name: "price 🔺", sortProperty: "-price" },
@@ -12,10 +17,10 @@ export const list = [
   { name: "a - z", sortProperty: "-title" },
 ];
 
-function Sort() {
+const Sort: React.FC = () => {
   const dispatch = useDispatch();
   const sort = useSelector(selectSort);
-  const sortRef = useRef();
+  const sortRef = useRef<HTMLDivElement>(null);
 
   const [visible, setVisible] = useState(false);
 
@@ -23,13 +28,15 @@ function Sort() {
     setVisible(!visible);
   };
 
-  const changeOnClickItem = (obj) => {
+  const changeOnClickItem = (obj: ListItem) => {
     dispatch(setSort(obj));
     setVisible(false);
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    const handleClickOutside = (event: any) => {
+      //NEED to Fix any type
       if (sortRef.current && !sortRef.current.contains(event.target)) {
         setVisible(false);
       }
@@ -82,6 +89,6 @@ function Sort() {
       )}
     </div>
   );
-}
+};
 
 export default Sort;

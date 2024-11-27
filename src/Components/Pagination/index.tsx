@@ -1,10 +1,15 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
-import PropTypes from "prop-types";
 
 import styles from "./pagination.module.scss";
 
-const Pagination = ({ currentPage, changePage }) => (
+/* eslint-disable @typescript-eslint/no-explicit-any */
+type PaginationProps = {
+  currentPage: number;
+  changePage: any; //NEED to Fix any type
+};
+
+const Pagination: React.FC<PaginationProps> = ({ currentPage, changePage }) => (
   <ReactPaginate
     className={styles.root}
     breakLabel="..."
@@ -19,8 +24,3 @@ const Pagination = ({ currentPage, changePage }) => (
 );
 
 export default Pagination;
-
-Pagination.propTypes = {
-  changePage: PropTypes.func.isRequired,
-  currentPage: PropTypes.number,
-};

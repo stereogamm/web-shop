@@ -13,6 +13,14 @@
 
 [![GH pages](https://img.shields.io/badge/GitHub-Pages-c051c1?style=for-the-badge&logo=github)]( https://stereogamm.github.io/web-shop/ )
 #### 
+
+## 🉐 How you can launch project 
+- Project launch on `localhost:4000` : `npm start`
+- Linting: `npm run lint` 
+- To fix errors: `npm run lint:fix` 
+- Project build: `npm run build`
+- Code formatting: `npm run format`
+
 ## 🍜 About the Project
 
 Welcome to my project 'NOODLE & BYTES'. This is a self-study project for creating an online yammy store, where I used the following tech stack: 
@@ -38,9 +46,11 @@ Welcome to my project 'NOODLE & BYTES'. This is a self-study project for creatin
 
 The project features responsive design using flex-box and grid approach and media query technology for standard screen resolutions of desktop displays, tablet screens, and mobile devices. The minimum supported screen resolution is 375 px
 
-- npm run 
-- npm run lint -- --fix
-- npm run deploy
+- Project launch on `localhost:4000` : `npm start`
+- Linting: `npm run lint` 
+- To fix errors: `npm run lint:fix` 
+- Project build: `npm run build`
+- Code formatting: `npm run format`
 
 
 

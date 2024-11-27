@@ -1,9 +1,14 @@
-// import React, { useState } from "react";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 
-function Categories({ value, onClickCategory }) {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+type CategoriesProps = {
+  value: number;
+  onClickCategory: any; //NEED to Fix any type
+};
+
+const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
   const categoties = [
     "All",
     "Creamy Tonkotsu",
@@ -28,7 +33,7 @@ function Categories({ value, onClickCategory }) {
       </ul>
     </div>
   );
-}
+};
 
 export default Categories;
 

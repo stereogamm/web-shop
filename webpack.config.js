@@ -51,7 +51,7 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         type: 'asset/resource',
         generator: {
-          filename: 'fonts/[name][ext]'  // Настраиваем путь сохранения шрифтов
+          filename: 'fonts/[name][ext]'  
         }
       }
     ]

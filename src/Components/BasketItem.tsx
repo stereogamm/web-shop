@@ -1,10 +1,26 @@
 import React from "react";
 import image from "../../public/assets/images/ramen_4.png";
-import PropTypes from "prop-types";
+
 import { useDispatch } from "react-redux";
 import { addItem, minusItem, removeItem } from "../redux/slices/BasketSlice";
 
-const BasketItem = ({ id, title, price, count, type, size }) => {
+type BasketItemProps = {
+  id: string;
+  title: string;
+  price: number;
+  count: number;
+  type: string;
+  size: number;
+};
+
+const BasketItem: React.FC<BasketItemProps> = ({
+  id,
+  title,
+  price,
+  count,
+  type,
+  size,
+}) => {
   const dispatch = useDispatch();
 
   const onClickPlus = () => {
@@ -30,7 +46,7 @@ const BasketItem = ({ id, title, price, count, type, size }) => {
   return (
     <div className="cart__item">
       <div className="cart__item-img">
-        <img className="pizza-block__image" src={image} alt="Ramen" />
+        <img className="ramen-block__image" src={image} alt="Ramen" />
       </div>
       <div className="cart__item-info">
         <h3>{title}</h3>
@@ -111,12 +127,3 @@ const BasketItem = ({ id, title, price, count, type, size }) => {
 };
 
 export default BasketItem;
-
-BasketItem.propTypes = {
-  id: PropTypes.number,
-  title: PropTypes.string,
-  price: PropTypes.number,
-  count: PropTypes.number,
-  type: PropTypes.string,
-  size: PropTypes.string,
-};

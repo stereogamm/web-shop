@@ -7,18 +7,22 @@ import { basketSelector } from "../redux/slices/BasketSlice";
 
 import Search from "./Search";
 
-function Header() {
+const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(basketSelector);
 
   //add this hook variable for conditioning rendering to show/hidden serch and basket component depending on URL path
   const { pathname } = useLocation();
 
-  const totalcount = items.reduce((sum, item) => sum + item.count, 0);
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const totalcount = items.reduce(
+    (sum: number, item: any) => sum + item.count, //NEED to Fix any type
+    0,
+  );
   return (
     <div className="header">
       <div className="container">
         <div className="header__logo">
-          <img width="38" src={logo} alt="Pizza logo" />
+          <img width="38" src={logo} alt="Ramen logo" />
           <div>
             <Link to="/">
               <h1>noodle & bytes</h1>
@@ -74,7 +78,7 @@ function Header() {
       </div>
     </div>
   );
-}
+};
 
 export default Header;
 

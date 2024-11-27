@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import styles from "./notFoundBlock.module.scss";
 
-const NotFoundBlock = () => (
+const NotFoundBlock: React.FC = () => (
   <div className={styles.root}>
     <h1>
       <span>🤫</span>
@@ -14,8 +14,12 @@ const NotFoundBlock = () => (
       *It seems this page has wandered off. While we track it down, you can head
       back to the homepage or pretend you never saw this
     </p>
-    <Link to="/" className={styles.btn__home} aria-label="return to main page">
-      🪂 сlick here to return to base
+    <Link
+      to="/"
+      className={styles.btn__home}
+      aria-label="return to the main page"
+    >
+      return to the main page
     </Link>
   </div>
 );
