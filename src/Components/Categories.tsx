@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type CategoriesProps = {
   value: number;
-  onClickCategory: any; //NEED to Fix any type
+  onClickCategory: (i: number) => void;
 };
 
 const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {

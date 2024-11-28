@@ -6,7 +6,7 @@ import styles from "./pagination.module.scss";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type PaginationProps = {
   currentPage: number;
-  changePage: any; //NEED to Fix any type
+  changePage: (page: number) => void;
 };
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, changePage }) => (

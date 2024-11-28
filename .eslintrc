@@ -25,6 +25,7 @@
                 "usePrettierrc": true
             }
         ],
+        "@typescript-eslint/no-unused-vars": "off",
         "react/react-in-jsx-scope": "off",
         "comma-dangle": "off",
         "use-isnan": ["error", { "enforceForSwitchCase": true }],

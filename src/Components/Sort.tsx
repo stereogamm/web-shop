@@ -35,9 +35,9 @@ const Sort: React.FC = () => {
 
   useEffect(() => {
     /* eslint-disable @typescript-eslint/no-explicit-any */
-    const handleClickOutside = (event: any) => {
+    const handleClickOutside = (event: MouseEvent) => {
       //NEED to Fix any type
-      if (sortRef.current && !sortRef.current.contains(event.target)) {
+      if (sortRef.current && !sortRef.current.contains(sortRef.current)) {
         setVisible(false);
       }
     };
