@@ -1,6 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
-const initialState = {
+type basketItem = {
+  id: string;
+  title: string;
+  price: number;
+  count: number;
+  type: number;
+  size: string;
+};
+
+interface IBasketSliceState {
+  totalPrice: number;
+  items: basketItem[];
+}
+
+const initialState: IBasketSliceState = {
   totalPrice: 0,
   items: [],
 };
@@ -41,7 +56,7 @@ export const basketSlice = createSlice({
 });
 
 //selector to get info from this slice and use it in the different components
-export const basketSelector = (state) => state.basketSlice;
+export const basketSelector = (state: RootState) => state.basketSlice;
 
 export const { addItem, removeItem, clearItems, minusItem } =
   basketSlice.actions;

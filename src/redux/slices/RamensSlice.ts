@@ -1,8 +1,31 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { RootState } from "../store";
+
+type RamenItem = {
+  id: string;
+  title: string;
+  price: number;
+  count: number;
+  type: number;
+  size: string;
+};
+
+interface IRamensSliceState {
+  items: RamenItem[];
+  status: "loading" | "success" | "error";
+}
+
+interface FetchRamensParams {
+  category: string;
+  sort: string;
+  replace: string;
+  search: string;
+  currentPage: number;
+}
 
 // make initial state for ramen data
-const initialState = {
+const initialState: IRamensSliceState = {
   items: [], // Array to store the list of ramen items
   status: "loading", //Current loading status: loading | success | error
 };
@@ -10,7 +33,7 @@ const initialState = {
 // asynchronous action to fetch the list of ramen
 export const getRamens = createAsyncThunk(
   "ramens/fetchRamens", // Name of the async action
-  async (params) => {
+  async (params: FetchRamensParams) => {
     // destructuring the parameters
     const { category, sort, replace, search, currentPage } = params;
 
@@ -52,7 +75,7 @@ export const ramensSlice = createSlice({
 });
 
 //get info from this slice and use it in other slices
-export const RamenSliceSelector = (state) => state.ramensSlice;
+export const RamenSliceSelector = (state: RootState) => state.ramensSlice;
 
 // exporting the action for manually updating items
 export const { setItems } = ramensSlice.actions;

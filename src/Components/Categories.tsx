@@ -18,19 +18,20 @@ const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
   ];
 
   return (
-    <div className="categories">
+    <nav className="categories">
       <ul>
         {categoties.map((categoryName, i) => (
           <li
             key={uuidv4()}
             onClick={() => onClickCategory(i)}
             className={value === i ? "active" : ""}
+            tabIndex={0}
           >
             {categoryName}
           </li>
         ))}
       </ul>
-    </div>
+    </nav>
   );
 };
 

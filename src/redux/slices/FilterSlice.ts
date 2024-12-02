@@ -1,6 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
-const initialState = {
+interface ISort {
+  name: string;
+  sortProperty: string;
+}
+
+interface IFilterState {
+  searchValue: string;
+  categoryId: number;
+  currentPage: number;
+  sort: ISort;
+}
+
+const initialState: IFilterState = {
   searchValue: "",
   categoryId: 0,
   currentPage: 1,
@@ -36,13 +49,15 @@ export const filterSlice = createSlice({
 });
 
 //selectors to use it into the different components
-export const selectFiltersCategory = (state) => state.filterSlice.categoryId;
-export const selectFiltersSortProperty = (state) =>
+export const selectFiltersCategory = (state: RootState) =>
+  state.filterSlice.categoryId;
+export const selectFiltersSortProperty = (state: RootState) =>
   state.filterSlice.sort.sortProperty;
-export const selectFiltersCurrentPage = (state) =>
+export const selectFiltersCurrentPage = (state: RootState) =>
   state.filterSlice.currentPage;
-export const selectSort = (state) => state.filterSlice.sort;
-export const selectSearchValue = (state) => state.filterSlice.searchValue;
+export const selectSort = (state: RootState) => state.filterSlice.sort;
+export const selectSearchValue = (state: RootState) =>
+  state.filterSlice.searchValue;
 
 // Action creators are generated for each case reducer function
 // By default reducer will be exported, but if we need - we can use any actions as we want
