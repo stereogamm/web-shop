@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { addItem, minusItem, removeItem } from "../redux/slices/BasketSlice";
 
 type BasketItemProps = {
-  id: string;
+  id: number;
   title: string;
   price: number;
   count: number;
@@ -27,6 +27,11 @@ const BasketItem: React.FC<BasketItemProps> = ({
     dispatch(
       addItem({
         id,
+        title: "",
+        price: 0,
+        count: 0,
+        type: "",
+        size: "",
       }),
     );
   };
