@@ -4,6 +4,7 @@ import image from "../../../public/assets/images/ramen_4.png";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addItem } from "../../redux/slices/BasketSlice";
+import { TbasketItem } from "../../redux/slices/BasketSlice";
 
 //type for component props
 type CardPropsType = {
@@ -43,12 +44,13 @@ const Card: React.FC<CardPropsType> = ({ price, title, sizes, types, id }) => {
   };
 
   const onClickAdd = () => {
-    const item = {
+    const item: TbasketItem = {
       id,
       price,
       type: isSpicy[activeType],
       size: sizes[activeSize],
       title,
+      count: 0,
     };
     dispatch(addItem(item));
     addRamen();

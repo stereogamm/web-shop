@@ -1,18 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
-type basketItem = {
-  id: string;
+export type TbasketItem = {
+  id: number;
   title: string;
   price: number;
   count: number;
-  type: number;
+  type: string;
   size: string;
 };
 
 interface IBasketSliceState {
   totalPrice: number;
-  items: basketItem[];
+  items: TbasketItem[];
 }
 
 const initialState: IBasketSliceState = {
@@ -24,7 +24,7 @@ export const basketSlice = createSlice({
   name: "basket",
   initialState,
   reducers: {
-    addItem(state, action) {
+    addItem(state, action: PayloadAction<TbasketItem>) {
       const findItem = state.items.find((obj) => obj.id == action.payload.id);
       if (findItem) {
         findItem.count++;
@@ -39,13 +39,13 @@ export const basketSlice = createSlice({
         0,
       );
     },
-    minusItem(state, action) {
+    minusItem(state, action: PayloadAction<number>) {
       const findItem = state.items.find((obj) => obj.id == action.payload);
       if (findItem) {
         findItem.count--;
       }
     },
-    removeItem(state, action) {
+    removeItem(state, action: PayloadAction<number>) {
       state.items = state.items.filter((obj) => obj.id !== action.payload);
     },
     clearItems(state) {
