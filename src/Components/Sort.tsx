@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSort } from "../redux/slices/FilterSlice";
 import { selectSort } from "../redux/slices/FilterSlice";
 
-type ListItem = {
+export type ListItem = {
   name: string;
   sortProperty: string;
 };

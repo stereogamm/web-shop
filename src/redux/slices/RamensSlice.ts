@@ -11,9 +11,14 @@ type RamenItem = {
   size: string;
 };
 
+export enum Status {
+  LOADING = "loading",
+  SUCCESS = "success",
+  ERROR = "error",
+}
 interface IRamensSliceState {
   items: RamenItem[];
-  status: "loading" | "success" | "error";
+  status: Status;
 }
 
 interface FetchRamensParams {
@@ -27,7 +32,7 @@ interface FetchRamensParams {
 // make initial state for ramen data
 const initialState: IRamensSliceState = {
   items: [], // Array to store the list of ramen items
-  status: "loading", //Current loading status: loading | success | error
+  status: Status.LOADING, //Current loading status: loading | success | error
 };
 
 // asynchronous action to fetch the list of ramen
@@ -58,18 +63,18 @@ export const ramensSlice = createSlice({
     // handling additional states for the async action
     builder.addCase(getRamens.pending, (state) => {
       state.items = [];
-      state.status = "loading";
+      state.status = Status.LOADING;
     });
     builder.addCase(getRamens.fulfilled, (state, action) => {
       // action for when the fetch request is successful
       state.items = action.payload;
-      state.status = "success";
+      state.status = Status.SUCCESS;
     });
     builder.addCase(getRamens.rejected, (state, action) => {
       // action for when the fetch request is failed
       console.error("Error fetching ramens:", action.error);
       state.items = [];
-      state.status = "error";
+      state.status = Status.ERROR;
     });
   },
 });

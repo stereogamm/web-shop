@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import qs from "qs"; // lib qs to create query string
 import { useNavigate } from "react-router-dom"; //use this function to navigate inline with query params
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   setCategoryId,
   setCurrentPage,
@@ -25,10 +25,11 @@ import {
   selectSearchValue,
 } from "../redux/slices/FilterSlice";
 import { RamenSliceSelector } from "../redux/slices/RamensSlice";
+import { useAppDispatch } from "../redux/store";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isSearch = useRef(false); // Track if it's a search to prevent initial fetch
   const isMounted = useRef(false); // Track if it's the first render
 
@@ -59,7 +60,6 @@ const Home: React.FC = () => {
 
     // request with filter queries
     dispatch(
-      //@ts-expect-error NEED TO FIX
       getRamens({
         category,
         sort,
@@ -91,7 +91,16 @@ const Home: React.FC = () => {
       const params = qs.parse(window.location.search.substring(1));
       const sort = list.find((obj) => obj.sortProperty === params.sortType);
 
-      dispatch(setFilters({ ...params, sort }));
+      dispatch(
+        setFilters({
+          ...params,
+          sort: sort ? sort : list[0],
+          searchValue:
+            typeof params.searchValue === "string" ? params.searchValue : "",
+          categoryId: Number(params.categoryId) || 0,
+          currentPage: Number(params.currentPage) || 1,
+        }),
+      );
       isSearch.current = false;
     }
   }, []);

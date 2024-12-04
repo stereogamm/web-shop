@@ -60,7 +60,7 @@ const Card: React.FC<CardPropsType> = ({ price, title, sizes, types, id }) => {
     <div className="ramen-block__wrapper">
       <div className="ramen-block">
         <img className="ramen-block__image" src={image} alt="Ramen" />
-        <h4 className="ramen-block__title">{title}</h4>
+        <h3 className="ramen-block__title">{title}</h3>
         <div className="ramen-block__selector">
           <ul>
             {types.map((type) => (
