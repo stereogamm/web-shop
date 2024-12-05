@@ -43,7 +43,9 @@
         "react/jsx-max-props-per-line": ["warn", { "maximum": 7 }],
         "react/jsx-max-depth": ["warn", { "max": 8 }],
         "arrow-body-style": ["warn", "as-needed"],
-        "valid-typeof": "warn"
+        "valid-typeof": "warn",
+        "react/display-name": "off",
+        "react/prop-types": "off"
     },
     "settings": {
         "react": {

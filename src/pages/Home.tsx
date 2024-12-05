@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
 import qs from "qs"; // lib qs to create query string
 import { useNavigate } from "react-router-dom"; //use this function to navigate inline with query params
@@ -41,9 +41,9 @@ const Home: React.FC = () => {
   const { items, status } = useSelector(RamenSliceSelector);
 
   // Dispatch action to set selected category
-  const onClickCategory = (id: number) => {
+  const onClickCategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  };
+  }, []);
 
   // Dispatch action to set current page
   const onChangePage = (number: number) => {
