@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import logo from "../../public/assets/images/logo_red.svg";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import Search from "./Search";
 
 const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(basketSelector);
+  const isFirstRender = useRef(false);
 
   //add this hook variable for conditioning rendering to show/hidden serch and basket component depending on URL path
   const { pathname } = useLocation();
@@ -17,6 +18,16 @@ const Header: React.FC = () => {
     (sum: number, item: any) => sum + item.count, //NEED to Fix any type
     0,
   );
+
+  //set data to Local Storage
+  React.useEffect(() => {
+    if (isFirstRender.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem("basket", json);
+    }
+    isFirstRender.current = true;
+  }, [items]);
+
   return (
     <div className="header">
       <div className="container">

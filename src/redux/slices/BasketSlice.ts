@@ -15,10 +15,30 @@ interface IBasketSliceState {
   items: TbasketItem[];
 }
 
-const initialState: IBasketSliceState = {
-  totalPrice: 0,
-  items: [],
+// To get data from localStorage
+const loadBasketFromLocalStorage = (): IBasketSliceState => {
+  try {
+    const basketData = localStorage.getItem("basket");
+    if (basketData) {
+      const parsedData: TbasketItem[] = JSON.parse(basketData);
+
+      const totalPrice = parsedData.reduce(
+        (sum, item) => sum + item.price * item.count,
+        0,
+      );
+
+      return {
+        items: parsedData,
+        totalPrice,
+      };
+    }
+  } catch (error) {
+    console.error("Failed to load basket from localStorage", error);
+  }
+  return { totalPrice: 0, items: [] }; // If don't have any data - return []
 };
+
+const initialState: IBasketSliceState = loadBasketFromLocalStorage();
 
 export const basketSlice = createSlice({
   name: "basket",
