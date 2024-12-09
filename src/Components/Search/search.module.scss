@@ -7,11 +7,10 @@ input {
   padding: 3px 35px 3px 10px;
   color: $text;
   font-size: 16px;
-  opacity: 0.7;
   width: 200px;
   transition: all 0.5s ease-in-out;
   position: relative;
-  caret-color: #bcb8b8;
+  caret-color: $logo;
   transition: border-color 0.3s;
 }
 
@@ -21,10 +20,15 @@ label {
 }
 
 input:focus {
-  outline: none;
   position: relative;
   color: $logo;
 }
+
+input:focus-visible {
+  position: relative;
+  color: $logo;
+}
+
 
 .empty__icon {
   width: 37px;
@@ -34,7 +38,7 @@ input:focus {
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  opacity: 0.3;
+  opacity: 0.7;
   transition: opacity 0.3s ease-in-out;
 
   &:hover {

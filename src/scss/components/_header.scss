@@ -34,7 +34,7 @@
     }
 
     p {
-      color: #aba8a8;
+      color: $text;
       font-weight: 600;
       text-transform: uppercase;
       font-size: 15px;
@@ -42,7 +42,7 @@
 
     span {
       text-transform: lowercase;
-      color: #aba8a8;
+      color: $text;
     }
   }
 }

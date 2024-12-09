@@ -16,10 +16,12 @@
 
 ## 🉐 How you can launch project 
 - (`localhost:4000`) Project launch: `npm start`
+
+## 🉐 Useful commands
 - Linting: `npm run lint` 
 - To fix errors: `npm run lint:fix` 
-- Project build: `npm run build`
 - Code formatting: `npm run format`
+- Project build: `npm run build` => to publick GH pages `npm run deploy`
 
 ## 🍜 About the Project
 

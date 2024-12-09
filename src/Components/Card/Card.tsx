@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import image from "../../../public/assets/images/ramen_4.png";
+import image from "../../../public/assets/images/ramen.png";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addItem } from "../../redux/slices/BasketSlice";
@@ -59,7 +59,11 @@ const Card: React.FC<CardPropsType> = ({ price, title, sizes, types, id }) => {
   return (
     <div className="ramen-block__wrapper">
       <div className="ramen-block">
-        <img className="ramen-block__image" src={image} alt="Ramen" />
+        <img
+          className="ramen-block__image"
+          src={image}
+          alt="Bowl of ramen and chopsticks with a soft-colored background and the text 'ramen'."
+        />
         <h3 className="ramen-block__title">{title}</h3>
         <div className="ramen-block__selector">
           <ul>
