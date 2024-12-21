@@ -83,7 +83,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js',
+    filename: '[name].bundle.[contenthash].js',
+    chunkFilename: '[name].chunk.[contenthash].js',
     assetModuleFilename: 'assets/[hash][ext][query]'
   },
   devServer: {
@@ -91,5 +92,22 @@ module.exports = {
     compress: true,
     historyApiFallback: true,
     port: 4000
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all', 
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        },
+        default: {
+          minChunks: 2, 
+          priority: -20,
+          reuseExistingChunk: true 
+        }
+      }
+    }
   }
 };
