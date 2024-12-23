@@ -16,6 +16,7 @@ import Card from "../Components/Card/Card";
 import Sort from "../Components/Sort";
 import SkeletonCard from "../Components/Card/SkeletonCard";
 import Pagination from "../Components/Pagination/index";
+
 import { list } from "../Components/Sort";
 import { getRamens } from "../redux/slices/RamensSlice";
 import {
