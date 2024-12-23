@@ -43,7 +43,7 @@ const Header: React.FC = () => {
           </div>
         </div>
 
-        {pathname !== "/basket" && (
+        {pathname == "/" && (
           <>
             <Search />
             <div className="header__cart">
