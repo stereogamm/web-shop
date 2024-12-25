@@ -62,7 +62,7 @@
     border-width: 2px;
     &,
     span {
-      color: $orange;
+      color: $logo;
     }
 
     svg {
@@ -72,7 +72,7 @@
     }
 
     &:hover {
-      background-color: $orange;
+      background-color: $logo;
 
       &,
       span {
@@ -87,7 +87,7 @@
     }
 
     &:active {
-      background-color: color.scale($orange, $lightness: -20%);
+      background-color: $cart_button;
     }
   }
 
@@ -112,15 +112,15 @@
     &:hover {
       i {
         background-color: $logo;
-        color: $orange;
+        color: white;
       }
     }
 
     i {
       display: inline-block;
       border-radius: 30px;
-      background-color: $orange;
-      color: $logo;
+      background-color: $logo;
+      color: white;
       font-weight: 600;
       width: 22px;
       height: 22px;

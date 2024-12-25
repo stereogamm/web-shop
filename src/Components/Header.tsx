@@ -29,18 +29,16 @@ const Header: React.FC = () => {
   }, [items]);
 
   return (
-    <div className="header">
+    <header className="header">
       <div className="container">
         <div className="header__logo">
           <img width="38" src={logo} alt="Ramen logo" />
-          <div>
+          <nav>
             <Link to="/">
               <h1>noodle & bytes</h1>
-              <p>
-                all you need is rock&apos;<span>n</span>&apos;ramen
-              </p>
+              <p>all you need is rock N ramen</p>
             </Link>
-          </div>
+          </nav>
         </div>
 
         {pathname == "/" && (
@@ -86,7 +84,7 @@ const Header: React.FC = () => {
           </>
         )}
       </div>
-    </div>
+    </header>
   );
 };
 
