@@ -1,4 +1,6 @@
 ## Project activity
+🉐[VIEW THIS PROJECT](https://noodle-and-bytes.vercel.app/)🉐
+=== 
 ![GitHub last commit](https://img.shields.io/github/last-commit/stereogamm/web-shop?style=for-the-badge&labelColor=%23fcd48c&color=%23fcd48c)
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/stereogamm/web-shop?style=for-the-badge&labelColor=%23d469b1&color=%23d469b1)
@@ -10,8 +12,6 @@
 
 ![Repo Card](https://github-readme-stats.vercel.app/api/pin/?username=stereogamm&repo=web-shop&theme=ambient_gradient&show_owner=true&hide=issues)
 
-
-[![GH pages](https://img.shields.io/badge/GitHub-Pages-c051c1?style=for-the-badge&logo=github)]( https://stereogamm.github.io/web-shop/ )
 #### 
 
 ## 🉐 How you can launch project 
@@ -27,17 +27,17 @@
 
 Welcome to my project 'NOODLE & BYTES'. This is a self-study project for creating an online yammy store, where I used the following tech stack: 
 
-🍥 React v18  
-🍥 Redux Toolkit (data/state management)
-🍥 React Router v6 (navigation)
-🍥 Axios + Fetch (backend requests)
-🍥 React Hooks (for state and lifecycle management)
-🍥 Prettier (code formatting)
-🍥 CSS-Modules / SCSS (styling)
-🍥 React Content Loader (skeleton loader)
-🍥 React Pagination (pagination implementation) 
-🍥 Lodash.Debounce (debouncing user input)
-🍥 npm 
+🍥 React v18\
+🍥 Redux Toolkit (data/state management)\
+🍥 React Router v6 (navigation)\
+🍥 Axios + Fetch (backend requests)\
+🍥 React Hooks (for state and lifecycle management)\
+🍥 Prettier (code formatting)\
+🍥 CSS-Modules / SCSS (styling)\
+🍥 React Content Loader (skeleton loader)\
+🍥 React Pagination (pagination implementation)\
+🍥 Lodash.Debounce (debouncing user input)\
+🍥 npm
 
 🉐 ...and a little bit of ramen magic. Let's get started! 
 
